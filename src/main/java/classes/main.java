@@ -28,13 +28,22 @@ public class main {
         Carro carro1 = new Carro (1, "escuderia legal", 45);
         Carro carro2 = new Carro (2, "escuderia legal", 54);
         
-        Escuderia escuderia = new Escuderia("escuderia legal",engenheiro1, mecanico1, piloto1, carro1);
+        Escuderia escuderia = new Escuderia("escuderia legal");
         
+        boolean verificacao;
+        
+        verificacao = escuderia.adicionarEngenheiros(engenheiro1);
+        if(verificacao){
+            System.out.println("engenheiro cadastrado com sucesso!!");
+        }
         escuderia.adicionarEngenheiros(engenheiro2);
+        escuderia.adicionarMecanicos(mecanico1);
         escuderia.adicionarMecanicos(mecanico2);
         escuderia.adicionarMecanicos(mecanico3);
         escuderia.adicionarMecanicos(mecanico4);
+        escuderia.adicionarPilotos(piloto1);
         escuderia.adicionarPilotos(piloto2);
+        escuderia.adicionarCarros(carro1);
         escuderia.adicionarCarros(carro2);
         
         String informacao = escuderia.informacoesEscuderia();

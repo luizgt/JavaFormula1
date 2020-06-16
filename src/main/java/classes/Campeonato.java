@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+
+
 
 /**
  * Class Campeonato
@@ -11,8 +14,8 @@ public class Campeonato {
 
   private int qtdCorridas;
   private int corridaAtual;
-  private Escuderia escuderias;
-  private Corrida corridas;
+  private ArrayList <Escuderia> escuderias = new ArrayList <>();
+  private ArrayList <Corrida> corridas = new ArrayList<>();
   
   //
   // Constructors
@@ -65,14 +68,14 @@ public class Campeonato {
    * @param newVar the new value of escuderias
    */
   public void setEscuderias (Escuderia newVar) {
-    escuderias = newVar;
+    escuderias.add(newVar);
   }
 
   /**
    * Get the value of escuderias
    * @return the value of escuderias
    */
-  public Escuderia getEscuderias () {
+  public ArrayList<Escuderia> getEscuderias () {
     return escuderias;
   }
 
@@ -81,14 +84,14 @@ public class Campeonato {
    * @param newVar the new value of corridas
    */
   public void setCorridas (Corrida newVar) {
-    corridas = newVar;
+    corridas.add(newVar);
   }
 
   /**
    * Get the value of corridas
    * @return the value of corridas
    */
-  public Corrida getCorridas () {
+  public ArrayList<Corrida> getCorridas () {
     return corridas;
   }
 

@@ -1,3 +1,5 @@
+package classes;
+
 
 import java.util.ArrayList;
 
@@ -13,7 +15,7 @@ public class Campeonato {
   //
 
   private int qtdCorridas;
-  private int corridaAtual;
+  private int corridaAtual = 0;
   private ArrayList <Escuderia> escuderias = new ArrayList <>();
   private ArrayList <Corrida> corridas = new ArrayList<>();
   
@@ -21,6 +23,11 @@ public class Campeonato {
   // Constructors
   //
   public Campeonato () { };
+  
+  public Campeonato(Corrida newCorrida){
+      qtdCorridas = 1;
+      setCorridas(newCorrida);
+  }
   
   //
   // Methods
@@ -98,5 +105,33 @@ public class Campeonato {
   //
   // Other methods
   //
+  
+  public void adicionarEscuderias(Escuderia newEscuderia){
+      setEscuderias(newEscuderia);
+  }
+  
+  public void adicionarCorridas(Corrida newCorrida){
+      setCorridas(newCorrida);
+      qtdCorridas++;
+  }
+  
+  public String informacoesCampeonato(){
+    String resultado = "";
+    resultado += "----------------------------\n";
+    
+    resultado += "\nEscuderias: ";
+    for(int i = 0; i < escuderias.size(); i++){
+          resultado += "\n" + escuderias.get(i).getNomeEscuderia();
+    }
+    
+    resultado += "\n----------------------------";
+    for(int i = 0; i < corridas.size(); i++){
+        resultado += "\n" + corridas.get(i).getCidade();
+    }
+    
+    resultado += "\n----------------------------" + "\nQuantidade de corridas: " + qtdCorridas + "\nCorrida atual: " + corridaAtual;
+      
+      return resultado;
+  }
 
 }

@@ -1,3 +1,8 @@
+package classes;
+
+
+import java.util.ArrayList;
+
 
 
 /**
@@ -9,14 +14,17 @@ public class Corrida {
   // Fields
   //
 
-  private Carro posicoes;
+  private ArrayList<Carro> posicoes = new ArrayList<>();
   private boolean chuva = false;
+  private String cidade;
   
   //
   // Constructors
   //
   public Corrida () { };
-  
+  public Corrida (String nome){
+      cidade = nome;
+  }
   //
   // Methods
   //
@@ -31,14 +39,14 @@ public class Corrida {
    * @param newVar the new value of posicoes
    */
   public void setPosicoes (Carro newVar) {
-    posicoes = newVar;
+    posicoes.add(newVar);
   }
 
   /**
    * Get the value of posicoes
    * @return the value of posicoes
    */
-  public Carro getPosicoes () {
+  public ArrayList<Carro> getPosicoes () {
     return posicoes;
   }
 
@@ -58,28 +66,35 @@ public class Corrida {
     return chuva;
   }
 
+  public String getCidade() {
+    return cidade;
+  }
+
+  public void setCidade(String cidade) {
+    this.cidade = cidade;
+  }
+  
+  
+
   //
   // Other methods
   //
 
   /**
    */
-  public void quebrarCarro()
-  {
+  public void quebrarCarro(){
   }
 
 
   /**
    */
-  private void comecarChover()
-  {
+  private void comecarChover(){
   }
 
 
   /**
    */
-  private void acidente()
-  {
+  private void acidente(){
   }
 
 

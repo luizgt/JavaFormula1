@@ -1,46 +1,16 @@
+package classes;
+
 
 
 /**
  * Class Piloto
  */
-public class Piloto {
+public class Piloto extends funcionario{
 
-  //
-  // Fields
-  //
-
-  private String nome;
-  
-  //
-  // Constructors
-  //
-  public Piloto () { };
-  
-  //
-  // Methods
-  //
-
-
-  //
-  // Accessor methods
-  //
-
-  /**
-   * Set the value of nome
-   * @param newVar the new value of nome
-   */
-  public void setNome (String newVar) {
-    nome = newVar;
-  }
-
-  /**
-   * Get the value of nome
-   * @return the value of nome
-   */
-  public String getNome () {
-    return nome;
-  }
-
+    public Piloto(String newNome) {
+        super(newNome);
+    }
+    
   //
   // Other methods
   //

@@ -1,3 +1,5 @@
+package classes;
+
 
 
 /**
@@ -14,11 +16,18 @@ public class Carro {
   private String equipe;
   private int voltaAtual;
   private float combustivel;
+  private int posicaoAtual;
   
   //
   // Constructors
   //
-  public Carro () { };
+  public Carro (int newId, String escuderia, float newCombustivel) { 
+      id = newId;
+      equipe = escuderia;
+      voltaAtual = 0;
+      combustivel = newCombustivel;
+      posicaoAtual = 0;
+  };
   
   //
   // Methods
@@ -108,9 +117,18 @@ public class Carro {
   public float getCombustivel () {
     return combustivel;
   }
+  
+  public int getPosicaoAtual() {
+    return posicaoAtual;
+  }
+
+  public void setPosicaoAtual(int posicaoAtual) {
+    this.posicaoAtual = posicaoAtual;
+  }
 
   //
   // Other methods
   //
+
 
 }

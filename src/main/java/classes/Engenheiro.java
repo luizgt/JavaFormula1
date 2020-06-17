@@ -1,68 +1,33 @@
+package classes;
+
 
 
 /**
  * Class Engenheiro
  */
-public class Engenheiro {
+public class Engenheiro extends funcionario{
 
-  //
-  // Fields
-  //
-
-  private String nome;
+    public Engenheiro(String newNome) {
+        super(newNome);
+    }
   
-  //
-  // Constructors
-  //
-  public Engenheiro () { };
   
-  //
-  // Methods
-  //
-
-
-  //
-  // Accessor methods
-  //
-
-  /**
-   * Set the value of nome
-   * @param newVar the new value of nome
-   */
-  public void setNome (String newVar) {
-    nome = newVar;
-  }
-
-  /**
-   * Get the value of nome
-   * @return the value of nome
-   */
-  public String getNome () {
-    return nome;
-  }
-
-  //
-  // Other methods
-  //
-
+  
   /**
    */
-  public void chamarTrocaDePneu()
-  {
+  public void chamarTrocaDePneu(){
   }
 
 
   /**
    */
-  public void chamarAbastecimento()
-  {
+  public void chamarAbastecimento(){
   }
 
 
   /**
    */
-  public void trocarPosicao()
-  {
+  public void trocarPosicao(){
   }
 
 

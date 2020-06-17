@@ -1,45 +1,16 @@
+package classes;
+
 
 
 /**
  * Class Mecanico
  */
-public class Mecanico {
+public class Mecanico extends funcionario{
 
-  //
-  // Fields
-  //
-
-  private String nome;
-  
-  //
-  // Constructors
-  //
-  public Mecanico () { };
-  
-  //
-  // Methods
-  //
-
-
-  //
-  // Accessor methods
-  //
-
-  /**
-   * Set the value of nome
-   * @param newVar the new value of nome
-   */
-  public void setNome (String newVar) {
-    nome = newVar;
-  }
-
-  /**
-   * Get the value of nome
-   * @return the value of nome
-   */
-  public String getNome () {
-    return nome;
-  }
+    public Mecanico(String newNome) {
+        super(newNome);
+    }
+    
 
   //
   // Other methods

@@ -5,7 +5,7 @@ package classes;
 /**
  * Class Carro
  */
-public class Carro {
+public class Carro extends Thread{
 
   //
   // Fields
@@ -15,8 +15,10 @@ public class Carro {
   private int id;
   private String equipe;
   private int voltaAtual;
+  private int qtdVoltas;
   private float combustivel;
   private int posicaoAtual;
+  private static int proximaPosicao = 1;
   
   //
   // Constructors
@@ -66,7 +68,7 @@ public class Carro {
    * Get the value of id
    * @return the value of id
    */
-  public int getId () {
+  public int getIdCarro () {
     return id;
   }
 
@@ -118,17 +120,61 @@ public class Carro {
     return combustivel;
   }
   
+  /**
+   * Set the value of posicaoAtual
+   * @param posicaoAtual the new value of posicaoAtual
+   */
+  public void setPosicaoAtual(int posicaoAtual) {
+    this.posicaoAtual = posicaoAtual;
+  }
+  
+  /**
+   * Get the value of posicaoAtual
+   * @return the value of posicaoAtual
+   */
   public int getPosicaoAtual() {
     return posicaoAtual;
   }
 
-  public void setPosicaoAtual(int posicaoAtual) {
-    this.posicaoAtual = posicaoAtual;
+  /**
+   * Set the value of qtdVoltas
+   * @param newVar the new value of qtdVoltas
+   */
+  public void setQtdVoltas (int newVar) {
+    qtdVoltas = newVar;
   }
 
+  /**
+   * Get the value of qtdVoltas
+   * @return the value of qtdVoltas
+   */
+  public int getqtdVoltas () {
+    return qtdVoltas;
+  }
+  
   //
   // Other methods
   //
 
+  @Override
+  public void run(){
+    for(voltaAtual = 0; voltaAtual < qtdVoltas; voltaAtual++){
+        System.out.println(equipe + " | " + (voltaAtual+1) + " | Combustível: " + combustivel);
+        
+        combustivel -= 2;   //gastando combustivel a cada volta
+        if(combustivel <= 0){
+            System.out.println("Carro "+id+" da equipe "+equipe+" parou para abastecer!");
+            combustivel = Mecanico.abastecerCarro();
+        }
+        
+//          aqui vamos chamar as funcoes para: 
+//              - eventos (quebra, acidente, etc);
+//          
+
+    }
+    posicaoAtual = proximaPosicao;  //carro finaliza a corrida e recebe a posicao disponivel
+    proximaPosicao++;   //atualiza a posicao para o proximo a finalizar a corrida
+    System.out.println("Carro "+id+" da equipe "+equipe+" terminou na posição: "+posicaoAtual+"!");
+  }
 
 }

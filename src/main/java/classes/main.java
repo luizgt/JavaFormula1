@@ -5,6 +5,8 @@
  */
 package classes;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Giulia
@@ -25,8 +27,16 @@ public class main {
         Engenheiro engenheiro1 = new Engenheiro("Milton");
         Engenheiro engenheiro2 = new Engenheiro("Danilo");
         
-        Carro carro1 = new Carro (1, "escuderia legal", 45);
-        Carro carro2 = new Carro (2, "escuderia legal", 54);
+        ArrayList <Carro> carros = new ArrayList();
+        carros.add(new Carro (1, "Ferrari", 45));
+        carros.add(new Carro (2, "Ferrari", 54));
+        carros.add(new Carro (1, "McLaren", 54));
+        carros.add(new Carro (2, "McLaren", 54));
+        carros.add(new Carro (1, "BMW", 54));
+        carros.add(new Carro (2, "BMW", 54));
+        carros.add(new Carro (1, "Mercedes", 54));
+        carros.add(new Carro (2, "Mercedes", 54));
+
         
         Escuderia escuderia = new Escuderia("escuderia legal");
         
@@ -43,26 +53,28 @@ public class main {
         escuderia.adicionarMecanicos(mecanico4);
         escuderia.adicionarPilotos(piloto1);
         escuderia.adicionarPilotos(piloto2);
-        escuderia.adicionarCarros(carro1);
-        escuderia.adicionarCarros(carro2);
+        escuderia.adicionarCarros(carros.get(0));
+        escuderia.adicionarCarros(carros.get(1));
         
         String informacao = escuderia.informacoesEscuderia();
         
         System.out.println(informacao);
         
-        Corrida corrida1 = new Corrida("São Paulo");
-        Corrida corrida2 = new Corrida("Londres");
-        Corrida corrida3 = new Corrida("Tokio");
+        Corrida corrida1 = new Corrida("São Paulo", 99, carros);
+        Corrida corrida2 = new Corrida("Londres", 120, carros);
+        Corrida corrida3 = new Corrida("Tokio", 135, carros);
         
         Campeonato campeonato1 = new Campeonato(corrida1);
         campeonato1.adicionarCorridas(corrida3);
         campeonato1.adicionarCorridas(corrida2);
         campeonato1.adicionarEscuderias(escuderia);
         
-        String infoCampeonato = campeonato1.informacoesCampeonato();
+        corrida3.largada(); //a corrida esta acontecendo aqui por enquanto, apenas para teste!!!!!
         
-        System.out.println("\n\nCampeonato\n");
-        System.out.println(infoCampeonato);
+//        String infoCampeonato = campeonato1.informacoesCampeonato();
+        
+//        System.out.println("\n\nCampeonato\n");
+//        System.out.println(infoCampeonato);
         
     }
 }

@@ -18,15 +18,18 @@ public class Mecanico extends funcionario{
 
   /**
    */
-  public void trocarPneus()
-  {
+  public static void trocarPneus(){
+      
   }
 
 
   /**
+   * Return a new quantity of gasoline
+   * @return the value of new gasoline
    */
-  public void abastecerCarro()
-  {
+  public static int abastecerCarro(){
+      System.out.println("Mecânico abasteceu o carro!");
+      return 150;
   }
 
 

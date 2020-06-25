@@ -18,8 +18,8 @@ public class Mecanico extends funcionario{
 
   /**
    */
-  public static void trocarPneus(){
-      
+  public static void trocarPneus(String equipe, int id){
+      System.out.println("Pneus trocados para chuva equipe: " + equipe + " " + id);
   }
 
 
@@ -30,6 +30,18 @@ public class Mecanico extends funcionario{
   public static int abastecerCarro(){
       System.out.println("Mecânico abasteceu o carro!");
       return 150;
+  }
+  
+  public static void acidenteCarro(String equipe, int id){
+      System.out.println("Carro " + equipe + " " + id + " em acidente");
+  }
+  
+  public static void pitstop(String equipe, int id){
+      System.out.println("Carro " + equipe + " " + id + " no pitstop");
+  }
+  
+  public static void carroQuebrado(String equipe, int id){
+      System.out.println("Carro " + equipe + " " + id + " quebrado");
   }
 
 

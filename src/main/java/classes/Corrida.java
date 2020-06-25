@@ -2,13 +2,14 @@ package classes;
 
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 
 /**
  * Class Corrida
  */
-public class Corrida{
+public class Corrida extends Thread{
 
   //
   // Fields
@@ -18,6 +19,7 @@ public class Corrida{
   private boolean chuva = false;
   private String cidade;
   private int qtdVoltas;
+  private int voltaAtual;
   
   //
   // Constructors
@@ -103,24 +105,7 @@ public class Corrida{
   
   //
   // Other methods
-  //
-
-  /**
-   */
-  public void quebrarCarro(){
-  }
-
-
-  /**
-   */
-  private void comecarChover(){
-  }
-
-
-  /**
-   */
-  private void acidente(){
-  }
+  //  
 
   public void largada(){
       for (Carro c : carros) {  //setando a quantidade de voltas para cada carro
@@ -130,6 +115,53 @@ public class Corrida{
       for (Carro c : carros) {  //iniciando as threads
           c.start();
       }
+      run(); //Uma thread em paralelo que controla os eventos
   }
+  
+  @Override
+    public void run(){
+        
+        for(voltaAtual = 0; voltaAtual < qtdVoltas; voltaAtual++){
+            Random random = new Random();
+      
+            int e = random.nextInt(70); 
+            //Soteia de 1 a 70, quanto maior esse número menor a probabilidade de eventos
+            //Sorteia um evento que pode ser: (1) Chuva (2)Acidente (3)Pitstop (4)Quebrar Carro
+            //(5) Trocar de posição (>6)Nenhum
+            int idCarro = random.nextInt(carros.size()); //Sorteia um doa carros
+            int idCarro2 = random.nextInt(carros.size()); //Sorteia outro carro, caso seja necessário
+
+            switch(e){
+              case 1: //Chuva para todos
+                  if(!chuva){ //Se ainda não estava chovendo, agora está chovendo
+                      System.out.println("Começou a chover");
+                    for(Carro c: carros){
+                        c.setEvento(1);
+                    }
+                  }
+                  chuva = true;
+                  break;
+              case 2: //Acidente com 2 carros
+                  //Carros em acidente são trocados ou retirados da corrida (??)
+                  //Por enquanto os carros estão sendo "substituídos" 
+                  System.out.println("Um acidente na pista");
+                  carros.get(idCarro).setEvento(2);
+                  carros.get(idCarro2).setEvento(2);
+                  break;
+              case 3: //Carro no pitstop
+                  carros.get(idCarro).setEvento(3);
+                  break;
+              case 4: //Carro quebrado
+                  carros.get(idCarro).setEvento(4);
+                  break;
+              case 5:
+                  carros.get(idCarro).setEvento(5);
+                  break;
+              default:
+                  break;
+
+            }
+        }  
+    }
 
 }

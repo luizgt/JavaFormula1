@@ -6,7 +6,7 @@ package classes;
  * Class Status
  */
 public class Status {
-
+    
   //
   // Fields
   //
@@ -26,8 +26,10 @@ public class Status {
   // Accessor methods
   //
 
+  
   //
   // Other methods
   //
+
 
 }

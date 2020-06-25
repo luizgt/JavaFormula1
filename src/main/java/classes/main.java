@@ -43,9 +43,9 @@ public class main {
         boolean verificacao;
         
         verificacao = escuderia.adicionarEngenheiros(engenheiro1);
-        if(verificacao){
-            System.out.println("engenheiro cadastrado com sucesso!!");
-        }
+//        if(verificacao){
+//            System.out.println("engenheiro cadastrado com sucesso!!");
+//        }
         escuderia.adicionarEngenheiros(engenheiro2);
         escuderia.adicionarMecanicos(mecanico1);
         escuderia.adicionarMecanicos(mecanico2);
@@ -58,11 +58,11 @@ public class main {
         
         String informacao = escuderia.informacoesEscuderia();
         
-        System.out.println(informacao);
+//        System.out.println(informacao);
         
         Corrida corrida1 = new Corrida("São Paulo", 99, carros);
         Corrida corrida2 = new Corrida("Londres", 120, carros);
-        Corrida corrida3 = new Corrida("Tokio", 135, carros);
+        Corrida corrida3 = new Corrida("Tokio", 40, carros);
         
         Campeonato campeonato1 = new Campeonato(corrida1);
         campeonato1.adicionarCorridas(corrida3);

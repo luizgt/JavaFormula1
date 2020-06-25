@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.Random;
+
 
 
 /**
@@ -19,6 +21,8 @@ public class Carro extends Thread{
   private float combustivel;
   private int posicaoAtual;
   private static int proximaPosicao = 1;
+  private int evento; //(0)nenhum (2)Em acidente (3)Pitstop (4)Quebrado (5)Trocar posição
+  private boolean chuva = false;
   
   //
   // Constructors
@@ -151,11 +155,22 @@ public class Carro extends Thread{
   public int getqtdVoltas () {
     return qtdVoltas;
   }
+
+    public int getEvento() {
+        return evento;
+    }
+
+    public void setEvento(int evento) {
+        this.evento = evento;
+    }
+  
+  
+  
   
   //
   // Other methods
   //
-
+  
   @Override
   public void run(){
     for(voltaAtual = 0; voltaAtual < qtdVoltas; voltaAtual++){
@@ -167,10 +182,34 @@ public class Carro extends Thread{
             combustivel = Mecanico.abastecerCarro();
         }
         
-//          aqui vamos chamar as funcoes para: 
-//              - eventos (quebra, acidente, etc);
-//          
-
+        if(evento == 1){ //Está chovendo
+            if(!chuva){ //Se ainda não estava chovendo, agora está
+                chuva = true;
+                Engenheiro.chamarTrocaDePneu(equipe, id);
+            }
+            evento = 0; //Volta para 0 o evento
+        }
+        
+        if(evento == 2){ //Carro envolvido em acidente
+            Engenheiro.acidenteNaPista(equipe, id);
+            evento = 0;
+        }
+        
+        if(evento == 3){ //Carro no pitstop
+            Engenheiro.chamarPitstop(equipe, id);
+            evento = 0;
+        }
+        
+        if(evento == 4){ //Carro quebrado
+            Engenheiro.chamarReparoCarro(equipe, id);
+            evento = 0;
+        }
+        
+        if(evento == 5){
+            Engenheiro.trocarPosicao(equipe);
+            evento = 0;
+        }
+        
     }
     posicaoAtual = proximaPosicao;  //carro finaliza a corrida e recebe a posicao disponivel
     proximaPosicao++;   //atualiza a posicao para o proximo a finalizar a corrida

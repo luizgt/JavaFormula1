@@ -42,7 +42,7 @@ public class Eventos extends Thread{
                   break;
               case 2:
                   for(Carro c: carros){
-                      if(c.getId() == idCarro){
+                      if(c.getIdCarro() == idCarro){
                           c.setEvento(1);
                       }
                   }

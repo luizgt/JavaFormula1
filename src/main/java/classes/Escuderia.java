@@ -180,7 +180,7 @@ public class Escuderia {
       resultado += "\n----------------------------";
       resultado += "\nCarros: ";
       for(int i = 0; i < carros.size(); i++){
-          resultado += "\n" + carros.get(i).getId() +" " + carros.get(i).getCombustivel();
+          resultado += "\n" + carros.get(i).getIdCarro() +" " + carros.get(i).getCombustivel();
       }
       resultado += "\n----------------------------";
       resultado += "\nPilotos: ";

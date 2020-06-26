@@ -1,13 +1,15 @@
 package classes;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 
 /**
  * Class Carro
  */
-public class Carro extends Thread{
+public class Carro implements Runnable{
 
   //
   // Fields
@@ -156,15 +158,29 @@ public class Carro extends Thread{
     return qtdVoltas;
   }
 
-    public int getEvento() {
-        return evento;
-    }
+  /**
+   * Get the evento
+   * @return the evento
+   */
+  public int getEvento() {
+    return evento;
+  }
 
-    public void setEvento(int evento) {
-        this.evento = evento;
-    }
+  /**
+   * Set the evento
+   * @param evento the new value of evento
+   */
+  public void setEvento(int evento) {
+    this.evento = evento;
+  }
   
-  
+  /**
+   * Set the proxima posicao
+   * @param proxPosicao the new value of proximaPosicao
+   */
+  public static void setProximaPosicao(int proxPosicao) {
+    Carro.proximaPosicao = proxPosicao;
+  }
   
   
   //
@@ -174,7 +190,7 @@ public class Carro extends Thread{
   @Override
   public void run(){
     for(voltaAtual = 0; voltaAtual < qtdVoltas; voltaAtual++){
-        System.out.println(equipe + " | " + (voltaAtual+1) + " | Combustível: " + combustivel);
+//        System.out.println(equipe + " | " + (voltaAtual+1) + " | Combustível: " + combustivel);
         
         combustivel -= 2;   //gastando combustivel a cada volta
         if(combustivel <= 0){
@@ -215,5 +231,24 @@ public class Carro extends Thread{
     proximaPosicao++;   //atualiza a posicao para o proximo a finalizar a corrida
     System.out.println("Carro "+id+" da equipe "+equipe+" terminou na posição: "+posicaoAtual+"!");
   }
+  
+  /**
+   * Retorna os carros ordenados de acordo com suas posições.
+   * @param carros
+   * @return 
+   */
+  public static ArrayList <Carro> ordenarCarros(ArrayList <Carro> carros){
+      Collections.sort(carros, new compararPosicoes());
+      return carros;
+  }
 
+  private static class compararPosicoes implements Comparator <Carro>{
+      @Override
+      public int compare(Carro c1, Carro c2){
+          if (c1.getPosicaoAtual() < c2.getPosicaoAtual())
+            return -1;
+          else return 1;
+      }
+  }
+  
 }

@@ -15,7 +15,9 @@ public class main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        ArrayList <Corrida> corridas = new ArrayList<>();
+        
         Piloto piloto1 = new Piloto("Luizinho");
         Piloto piloto2 = new Piloto("Giulia");
         
@@ -28,15 +30,15 @@ public class main {
         Engenheiro engenheiro2 = new Engenheiro("Danilo");
         
         ArrayList <Carro> carros = new ArrayList();
+        carros.add(new Carro (1, "Mercedes", 54));
+        carros.add(new Carro (2, "Mercedes", 54));
         carros.add(new Carro (1, "Ferrari", 45));
         carros.add(new Carro (2, "Ferrari", 54));
         carros.add(new Carro (1, "McLaren", 54));
         carros.add(new Carro (2, "McLaren", 54));
         carros.add(new Carro (1, "BMW", 54));
         carros.add(new Carro (2, "BMW", 54));
-        carros.add(new Carro (1, "Mercedes", 54));
-        carros.add(new Carro (2, "Mercedes", 54));
-
+        
         
         Escuderia escuderia = new Escuderia("escuderia legal");
         
@@ -59,17 +61,32 @@ public class main {
         String informacao = escuderia.informacoesEscuderia();
         
 //        System.out.println(informacao);
+
+        corridas.add(new Corrida("São Paulo", 99, carros));
+        corridas.add(new Corrida("Londres", 120, carros));
+        corridas.add(new Corrida("Tokio", 40, carros));
+        corridas.add(new Corrida("GP do Marrocos", 120, carros));
+        corridas.add(new Corrida("GP da Grã-Bretranha", 120, carros));
+        corridas.add(new Corrida("GP da Austrália", 120, carros));
+        corridas.add(new Corrida("GP dos Estados Unidos", 120, carros));
+//        corridas.add(new Corrida("GP da Alemanha", 120, carros));
+//        corridas.add(new Corrida("GP do Bahrein", 120, carros));
+//        corridas.add(new Corrida("GP da Europa", 120, carros));
+//        corridas.add(new Corrida("GP do Azerbaijão", 120, carros));
+//        corridas.add(new Corrida("GP da Espanha", 120, carros));
+//        corridas.add(new Corrida("GP da Suíça", 120, carros));
+//        corridas.add(new Corrida("GP da Índia", 120, carros));
+//        corridas.add(new Corrida("GP da França", 120, carros));
+//        corridas.add(new Corrida("GP do Canadá", 120, carros));
+//        corridas.add(new Corrida("GP do México", 120, carros));
+//        corridas.add(new Corrida("GP da Turquia", 120, carros));
+//        corridas.add(new Corrida("GP do Brasil", 120, carros));
         
-        Corrida corrida1 = new Corrida("São Paulo", 99, carros);
-        Corrida corrida2 = new Corrida("Londres", 120, carros);
-        Corrida corrida3 = new Corrida("Tokio", 40, carros);
-        
-        Campeonato campeonato1 = new Campeonato(corrida1);
-        campeonato1.adicionarCorridas(corrida3);
-        campeonato1.adicionarCorridas(corrida2);
+        Campeonato campeonato1 = new Campeonato(corridas, carros);
         campeonato1.adicionarEscuderias(escuderia);
         
-        corrida3.largada(); //a corrida esta acontecendo aqui por enquanto, apenas para teste!!!!!
+        campeonato1.IniciarCampeonato();
+//        corrida3.largada(); //a corrida esta acontecendo aqui por enquanto, apenas para teste!!!!!
         
 //        String infoCampeonato = campeonato1.informacoesCampeonato();
         

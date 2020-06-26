@@ -43,8 +43,8 @@ public class Corrida extends Thread{
    * Set the value of posicoes
    * @param newVar the new value of posicoes
    */
-  public void setPosicoes (Carro newVar) {
-    carros.add(newVar);
+  public void setPosicoes (ArrayList <Carro> newVar) {
+    carros = (ArrayList) newVar.clone();
   }
 
   /**
@@ -107,15 +107,34 @@ public class Corrida extends Thread{
   // Other methods
   //  
 
-  public void largada(){
-      for (Carro c : carros) {  //setando a quantidade de voltas para cada carro
+  
+  /**
+   * Inicia a corrida e retorna a posicao dos carros
+     * @param carrosDaCorrida
+     * @return O ArrayList com os carros participantes da corrida de forma ordenada
+     * @throws java.lang.InterruptedException
+   * @void
+   */
+  public ArrayList <Carro> largada(ArrayList <Carro> carrosDaCorrida) throws InterruptedException{      
+      System.out.println("\n\n\n> Iniciando corrida "+cidade+"\n");
+      
+      Carro.setProximaPosicao(1);       //resetando o atributo static das posicoes
+      
+      for (Carro c : carrosDaCorrida)   //setando a quantidade de voltas para cada carro
           c.setQtdVoltas(qtdVoltas);
+      
+      for (Carro c : carrosDaCorrida) {  //executando as threads
+          Thread td = new Thread(c);    //prepara a execucao da classe runnable como uma thread
+          td.start();
       }
       
-      for (Carro c : carros) {  //iniciando as threads
-          c.start();
-      }
-      run(); //Uma thread em paralelo que controla os eventos
+      Thread.sleep(500);    //garantindo que todos os carros terminaram a corrida antes de ordena-los
+      carrosDaCorrida = Carro.ordenarCarros(carrosDaCorrida);
+      
+//      acho que essa thread não pode ser usada aqui ou assim
+//      run(); //Uma thread em paralelo que controla os eventos
+
+      return carrosDaCorrida;
   }
   
   @Override

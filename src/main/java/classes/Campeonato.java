@@ -16,6 +16,7 @@ public class Campeonato {
 
   private int qtdCorridas;
   private int corridaAtual = 0;
+  private ArrayList <Carro> carros;
   private ArrayList <Escuderia> escuderias = new ArrayList <>();
   private ArrayList <Corrida> corridas = new ArrayList<>();
   
@@ -24,9 +25,10 @@ public class Campeonato {
   //
   public Campeonato () { };
   
-  public Campeonato(Corrida newCorrida){
+  public Campeonato(ArrayList <Corrida> corridas, ArrayList <Carro> carros){
       qtdCorridas = 1;
-      setCorridas(newCorrida);
+      this.corridas = corridas;
+      this.carros = carros;
   }
   
   //
@@ -92,6 +94,7 @@ public class Campeonato {
    */
   public void setCorridas (Corrida newVar) {
     corridas.add(newVar);
+    qtdCorridas++;
   }
 
   /**
@@ -132,6 +135,29 @@ public class Campeonato {
     resultado += "\n----------------------------" + "\nQuantidade de corridas: " + qtdCorridas + "\nCorrida atual: " + corridaAtual;
       
       return resultado;
+  }
+  
+  /**
+   * Inicia o campeonato, iterando entre as corridas adicionadas.
+     * @throws java.lang.InterruptedException
+   * @void
+   */
+  public void IniciarCampeonato() throws InterruptedException{
+      ArrayList <Carro> auxCarros;
+      
+      for(Corrida corrida : corridas){
+          auxCarros = corrida.largada(carros);  //recebe o resultado da corrida
+          Thread.sleep(1000);   //garante a finalizacao da corrida para iniciar a proxima
+          
+          corrida.setPosicoes(auxCarros);   //salva o resultado da corrida nela
+      }
+      
+      for(Corrida corrida : corridas){
+          System.out.println("\n Posições");
+          for(Carro c : corrida.getPosicoes()){
+              System.out.println(c.getEquipe()+" | "+c.getPosicaoAtual());
+          }
+      }
   }
 
 }

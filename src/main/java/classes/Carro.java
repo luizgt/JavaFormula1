@@ -15,7 +15,7 @@ public class Carro implements Runnable{
   // Fields
   //
 
-  private Status status = null;
+  private Status status = null; //Status do carro, se esta correndo, pitstop ou terminou a corrida
   private int id;
   private String equipe;
   private int voltaAtual;
@@ -175,6 +175,22 @@ public class Carro implements Runnable{
   }
   
   /**
+   * Set the chuva
+   * @return the chuva
+   */
+  public boolean isChuva() {
+    return chuva;
+  }
+  
+  /**
+   * Set the chuva
+   * @param chuva the new value of chuva
+   */
+  public void setChuva(boolean chuva) {
+    this.chuva = chuva;
+  }
+  
+  /**
    * Set the proxima posicao
    * @param proxPosicao the new value of proximaPosicao
    */
@@ -200,28 +216,36 @@ public class Carro implements Runnable{
         
         if(evento == 1){ //Está chovendo
             if(!chuva){ //Se ainda não estava chovendo, agora está
+                status.setPitstop(true);
                 chuva = true;
                 Engenheiro.chamarTrocaDePneu(equipe, id);
+                status.setPitstop(false);
             }
             evento = 0; //Volta para 0 o evento
         }
         
         if(evento == 2){ //Carro envolvido em acidente
+            status.setPitstop(true);
             Engenheiro.acidenteNaPista(equipe, id);
             evento = 0;
+            status.setPitstop(false);
         }
         
         if(evento == 3){ //Carro no pitstop
+            status.setPitstop(true);
             Engenheiro.chamarPitstop(equipe, id);
             evento = 0;
+            status.setPitstop(false);
         }
         
         if(evento == 4){ //Carro quebrado
+            status.setPitstop(true);
             Engenheiro.chamarReparoCarro(equipe, id);
             evento = 0;
+            status.setPitstop(false);
         }
         
-        if(evento == 5){
+        if(evento == 5){ //Troca de posição
             Engenheiro.trocarPosicao(equipe);
             evento = 0;
         }
@@ -229,7 +253,9 @@ public class Carro implements Runnable{
     }
     posicaoAtual = proximaPosicao;  //carro finaliza a corrida e recebe a posicao disponivel
     proximaPosicao++;   //atualiza a posicao para o proximo a finalizar a corrida
-    System.out.println("Carro "+id+" da equipe "+equipe+" terminou na posição: "+posicaoAtual+"!");
+    status.setTerminouCorrida(true);
+    status.setCorrendo(false);
+    //System.out.println("Carro "+id+" da equipe "+equipe+" terminou na posição: "+posicaoAtual+"!");
   }
   
   /**

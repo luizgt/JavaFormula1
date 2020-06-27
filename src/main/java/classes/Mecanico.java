@@ -33,7 +33,7 @@ public class Mecanico extends funcionario{
   }
   
   public static void acidenteCarro(String equipe, int id){
-      System.out.println("Carro " + equipe + " " + id + " em acidente");
+      System.out.println("Carro " + equipe + " " + id + " consertado");
   }
   
   public static void pitstop(String equipe, int id){

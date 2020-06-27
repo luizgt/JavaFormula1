@@ -119,20 +119,25 @@ public class Corrida extends Thread{
       System.out.println("\n\n\n> Iniciando corrida "+cidade+"\n");
       
       Carro.setProximaPosicao(1);       //resetando o atributo static das posicoes
+      boolean correndo = true;
+      boolean fim = false;
+      Status s = new Status(correndo, fim);
+      chuva = false; //Ainda não está chovendo
       
-      for (Carro c : carrosDaCorrida)   //setando a quantidade de voltas para cada carro
-          c.setQtdVoltas(qtdVoltas);
-      
+      for (Carro c : carrosDaCorrida){   
+          c.setQtdVoltas(qtdVoltas); //setando a quantidade de voltas para cada carro
+          c.setEvento(0); //Setando o evento para 0 de novo
+          c.setChuva(false); //Setando que não está chovendo
+          c.setStatus(s); //Setando status do carro
+      }
       for (Carro c : carrosDaCorrida) {  //executando as threads
           Thread td = new Thread(c);    //prepara a execucao da classe runnable como uma thread
           td.start();
       }
+      run(); //Uma thread em paralelo que controla os eventos
       
       Thread.sleep(500);    //garantindo que todos os carros terminaram a corrida antes de ordena-los
       carrosDaCorrida = Carro.ordenarCarros(carrosDaCorrida);
-      
-//      acho que essa thread não pode ser usada aqui ou assim
-//      run(); //Uma thread em paralelo que controla os eventos
 
       return carrosDaCorrida;
   }
@@ -160,21 +165,41 @@ public class Corrida extends Thread{
                   }
                   chuva = true;
                   break;
-              case 2: //Acidente com 2 carros
+              case 2: //Acidente com 2 carros - Verifica se os carros ainda estão correndo
                   //Carros em acidente são trocados ou retirados da corrida (??)
                   //Por enquanto os carros estão sendo "substituídos" 
-                  System.out.println("Um acidente na pista");
-                  carros.get(idCarro).setEvento(2);
-                  carros.get(idCarro2).setEvento(2);
+                  if((carros.get(idCarro).getStatus().isCorrendo())&&(carros.get(idCarro2).getStatus().isCorrendo())){
+                    System.out.println("Um acidente na pista " + carros.get(idCarro).getEquipe() + " " + 
+                          carros.get(idCarro).getIdCarro() +  " e " + carros.get(idCarro2).getEquipe() + " " + carros.get(idCarro2).getIdCarro());
+                    carros.get(idCarro).setEvento(2);
+                    carros.get(idCarro2).setEvento(2);
+                  }
                   break;
-              case 3: //Carro no pitstop
-                  carros.get(idCarro).setEvento(3);
+              case 3: //Carro no pitstop - Verifica se o carro ainda está na corrida
+                  if(carros.get(idCarro).getStatus().isCorrendo()){
+                    carros.get(idCarro).setEvento(3);
+                  }
                   break;
-              case 4: //Carro quebrado
-                  carros.get(idCarro).setEvento(4);
+              case 4: //Carro quebrado - Verifica se o carro ainda está na corrida
+                  if(carros.get(idCarro).getStatus().isCorrendo()){
+                      carros.get(idCarro).setEvento(4);
+                  }
                   break;
-              case 5:
-                  carros.get(idCarro).setEvento(5);
+              case 5: //Troca de posição - Verifica se os carros ainda estão na corrida
+                  String equipe = carros.get(idCarro).getEquipe();
+                  Carro c1 = carros.get(idCarro);
+                  Carro c2 = null;
+
+                  for(Carro c : carros){
+                      if(c.getEquipe().equals(equipe)){ //Carros precisam ser da mesma equipe
+                          if(c1.getIdCarro() != c.getIdCarro())
+                              c2 = c;
+                      }
+                  }
+                  
+                   if((c1.getStatus().isCorrendo())&&(c2.getStatus().isCorrendo())){
+                    carros.get(idCarro).setEvento(5);
+                   }
                   break;
               default:
                   break;

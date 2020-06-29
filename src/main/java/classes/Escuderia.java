@@ -15,7 +15,7 @@ public class Escuderia {
   // Fields
   //
   private String nomeEscuderia;
-  private short posicaoCampeonato = 0;
+  private short qtdPontosNoCampeonato = 0;
   private ArrayList<Engenheiro> engenheiros = new ArrayList<>();
   private ArrayList<Mecanico> mecanicos = new ArrayList<>();
   private ArrayList<Piloto> pilotos = new ArrayList<>();
@@ -42,19 +42,19 @@ public class Escuderia {
   //
 
   /**
-   * Set the value of posicaoCampeonato
-   * @param newVar the new value of posicaoCampeonato
+   * Set the value of qtdPontosNoCampeonato
+   * @param newVar the new value of qtdPontosNoCampeonato
    */
   public void setPosicaoCampeonato (short newVar) {
-    posicaoCampeonato = newVar;
+    qtdPontosNoCampeonato = newVar;
   }
 
   /**
-   * Get the value of posicaoCampeonato
-   * @return the value of posicaoCampeonato
+   * Get the value of qtdPontosNoCampeonato
+   * @return the value of qtdPontosNoCampeonato
    */
   public short getPosicaoCampeonato () {
-    return posicaoCampeonato;
+    return qtdPontosNoCampeonato;
   }
 
   /**

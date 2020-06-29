@@ -17,7 +17,7 @@ public class Carro implements Runnable{
 
   private Status status = null; //Status do carro, se esta correndo, pitstop ou terminou a corrida
   private int id;
-  private String equipe;
+  private String escuderia;
   private int voltaAtual;
   private int qtdVoltas;
   private float combustivel;
@@ -25,16 +25,25 @@ public class Carro implements Runnable{
   private static int proximaPosicao = 1;
   private int evento; //(0)nenhum (2)Em acidente (3)Pitstop (4)Quebrado (5)Trocar posição
   private boolean chuva = false;
+  private short qtdPontosNoCampeonato;
+
   
   //
   // Constructors
   //
   public Carro (int newId, String escuderia, float newCombustivel) { 
       id = newId;
-      equipe = escuderia;
+      this.escuderia = escuderia;
       voltaAtual = 0;
       combustivel = newCombustivel;
       posicaoAtual = 0;
+      qtdPontosNoCampeonato = 0;
+  };
+  
+  public Carro (String escuderia, int newId, int posicaoAtual) { 
+      this.id = newId;
+      this.escuderia = escuderia;
+      this.posicaoAtual = posicaoAtual;
   };
   
   //
@@ -79,19 +88,19 @@ public class Carro implements Runnable{
   }
 
   /**
-   * Set the value of equipe
-   * @param newVar the new value of equipe
+   * Set the value of escuderia
+   * @param newVar the new value of escuderia
    */
-  public void setEquipe (String newVar) {
-    equipe = newVar;
+  public void setEscuderia (String newVar) {
+    escuderia = newVar;
   }
 
   /**
-   * Get the value of equipe
-   * @return the value of equipe
+   * Get the value of escuderia
+   * @return the value of escuderia
    */
-  public String getEquipe () {
-    return equipe;
+  public String getEscuderia () {
+    return escuderia;
   }
 
   /**
@@ -198,6 +207,22 @@ public class Carro implements Runnable{
     Carro.proximaPosicao = proxPosicao;
   }
   
+  /**
+   * Set the value of qtdPontosNoCampeonato
+   * @param newVar the new value of qtdPontosNoCampeonato
+   */
+  public void setQtdPontosNoCampeonato (short newVar) {
+    qtdPontosNoCampeonato = newVar;
+  }
+
+  /**
+   * Get the value of qtdPontosNoCampeonato
+   * @return the value of qtdPontosNoCampeonato
+   */
+  public short getQtdPontosNoCampeonato () {
+    return qtdPontosNoCampeonato;
+  }
+  
   
   //
   // Other methods
@@ -210,7 +235,7 @@ public class Carro implements Runnable{
         
         combustivel -= 2;   //gastando combustivel a cada volta
         if(combustivel <= 0){
-            System.out.println("Carro "+id+" da equipe "+equipe+" parou para abastecer!");
+            System.out.println("Carro "+id+" da equipe "+escuderia+" parou para abastecer!");
             combustivel = Mecanico.abastecerCarro();
         }
         
@@ -218,7 +243,7 @@ public class Carro implements Runnable{
             if(!chuva){ //Se ainda não estava chovendo, agora está
                 status.setPitstop(true);
                 chuva = true;
-                Engenheiro.chamarTrocaDePneu(equipe, id);
+                Engenheiro.chamarTrocaDePneu(escuderia, id);
                 status.setPitstop(false);
             }
             evento = 0; //Volta para 0 o evento
@@ -226,27 +251,27 @@ public class Carro implements Runnable{
         
         if(evento == 2){ //Carro envolvido em acidente
             status.setPitstop(true);
-            Engenheiro.acidenteNaPista(equipe, id);
+            Engenheiro.acidenteNaPista(escuderia, id);
             evento = 0;
             status.setPitstop(false);
         }
         
         if(evento == 3){ //Carro no pitstop
             status.setPitstop(true);
-            Engenheiro.chamarPitstop(equipe, id);
+            Engenheiro.chamarPitstop(escuderia, id);
             evento = 0;
             status.setPitstop(false);
         }
         
         if(evento == 4){ //Carro quebrado
             status.setPitstop(true);
-            Engenheiro.chamarReparoCarro(equipe, id);
+            Engenheiro.chamarReparoCarro(escuderia, id);
             evento = 0;
             status.setPitstop(false);
         }
         
         if(evento == 5){ //Troca de posição
-            Engenheiro.trocarPosicao(equipe);
+            Engenheiro.trocarPosicao(escuderia);
             evento = 0;
         }
         

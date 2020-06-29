@@ -16,7 +16,7 @@ public class Campeonato {
 
   private int qtdCorridas;
   private int corridaAtual = 0;
-  private ArrayList <Carro> carros;
+  private ArrayList <Carro> carros = new ArrayList <>();
   private ArrayList <Escuderia> escuderias = new ArrayList <>();
   private ArrayList <Corrida> corridas = new ArrayList<>();
   
@@ -25,11 +25,13 @@ public class Campeonato {
   //
   public Campeonato () { };
   
-  public Campeonato(ArrayList <Corrida> corridas, ArrayList <Carro> carros){
-      qtdCorridas = 1;
+  public Campeonato(ArrayList <Corrida> corridas, ArrayList <Escuderia> escuderias){
+      qtdCorridas = corridas.size();
       this.corridas = corridas;
-      this.carros = carros;
-  }
+      this.escuderias = escuderias;
+      
+      setarCarros(escuderias);
+  };
   
   //
   // Methods
@@ -109,6 +111,18 @@ public class Campeonato {
   // Other methods
   //
   
+  /**
+   *  Pega os carros do ArrayList de escuderias e os coloca no ArrayList de carros
+   *  @@code 
+   */
+  private void setarCarros(ArrayList <Escuderia> escuderias){
+    for(Escuderia esc : escuderias)
+        for(Carro carro : esc.getCarros()){
+            Carro AuxCarro = new Carro(carro.getIdCarro(), carro.getEscuderia(), carro.getCombustivel());
+            carros.add(AuxCarro);
+        }
+  }
+  
   public void adicionarEscuderias(Escuderia newEscuderia){
       setEscuderias(newEscuderia);
   }
@@ -143,21 +157,20 @@ public class Campeonato {
    * @void
    */
   public void IniciarCampeonato() throws InterruptedException{
-      ArrayList <Carro> auxCarros;
-      
-      for(Corrida corrida : corridas){
-          auxCarros = corrida.largada(carros);  //recebe o resultado da corrida
-          Thread.sleep(1000);   //garante a finalizacao da corrida para iniciar a proxima
+    for(Corrida corrida : corridas){
+        corrida.largada(carros);  //recebe o resultado da corrida
+        Thread.sleep(1000);   //garante a finalizacao da corrida para iniciar a proxima
+    }
           
-          corrida.setPosicoes(auxCarros);   //salva o resultado da corrida nela
-      }
-      
-      for(Corrida corrida : corridas){
-          System.out.println("\n Posições");
-          for(Carro c : corrida.getPosicoes()){
-              System.out.println(c.getEquipe()+" | "+c.getPosicaoAtual());
-          }
-      }
+    for(Corrida corrida : corridas){
+        
+        System.out.println("\n Posições no Campeonato");
+        for(Carro c : corrida.getPosicoes()){
+            c.setQtdPontosNoCampeonato(Corrida.retornarPontosDaCorrida(c));
+            System.out.println(c.getEscuderia()+" | "+c.getPosicaoAtual());
+        }
+    }
   }
 
+  
 }

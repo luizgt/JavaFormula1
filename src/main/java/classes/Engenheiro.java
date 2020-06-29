@@ -29,7 +29,7 @@ public class Engenheiro extends funcionario{
   /**
    */
   public static void trocarPosicao(String equipe){
-      System.out.println("Trocar posições equipe " + equipe);
+//      System.out.println("Trocar posições equipe " + equipe);
   }
 
   public static void acidenteNaPista(String equipe, int id){

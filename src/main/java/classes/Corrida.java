@@ -15,7 +15,7 @@ public class Corrida extends Thread{
   // Fields
   //
 
-  private ArrayList<Carro> carros;
+  private ArrayList<Carro> carros = new ArrayList <>();
   private boolean chuva = false;
   private String cidade;
   private int qtdVoltas;
@@ -29,6 +29,11 @@ public class Corrida extends Thread{
       cidade = nomeCidade;
       this.qtdVoltas = qtdVoltas;
       this.carros = carros;
+  }
+  
+  public Corrida (String nomeCidade, int qtdVoltas){
+      cidade = nomeCidade;
+      this.qtdVoltas = qtdVoltas;
   }
   //
   // Methods
@@ -44,7 +49,7 @@ public class Corrida extends Thread{
    * @param newVar the new value of posicoes
    */
   public void setPosicoes (ArrayList <Carro> newVar) {
-    carros = (ArrayList) newVar.clone();
+      carros = (ArrayList) newVar.clone();
   }
 
   /**
@@ -111,11 +116,12 @@ public class Corrida extends Thread{
   /**
    * Inicia a corrida e retorna a posicao dos carros
      * @param carrosDaCorrida
-     * @return O ArrayList com os carros participantes da corrida de forma ordenada
      * @throws java.lang.InterruptedException
    * @void
    */
-  public ArrayList <Carro> largada(ArrayList <Carro> carrosDaCorrida) throws InterruptedException{      
+  public void largada(ArrayList <Carro> carrosDaCorrida) throws InterruptedException{   
+      this.carros = carrosDaCorrida;
+
       System.out.println("\n\n\n> Iniciando corrida "+cidade+"\n");
       
       Carro.setProximaPosicao(1);       //resetando o atributo static das posicoes
@@ -136,10 +142,10 @@ public class Corrida extends Thread{
       }
       run(); //Uma thread em paralelo que controla os eventos
       
-      Thread.sleep(500);    //garantindo que todos os carros terminaram a corrida antes de ordena-los
+      Thread.sleep(1000);    //garantindo que todos os carros terminaram a corrida antes de ordena-los     
       carrosDaCorrida = Carro.ordenarCarros(carrosDaCorrida);
-
-      return carrosDaCorrida;
+      
+      this.carros = copiarCarros(carrosDaCorrida);  //guardando resultado da corrida na Corrida      
   }
   
   @Override
@@ -169,8 +175,8 @@ public class Corrida extends Thread{
                   //Carros em acidente são trocados ou retirados da corrida (??)
                   //Por enquanto os carros estão sendo "substituídos" 
                   if((carros.get(idCarro).getStatus().isCorrendo())&&(carros.get(idCarro2).getStatus().isCorrendo())){
-                    System.out.println("Um acidente na pista " + carros.get(idCarro).getEquipe() + " " + 
-                          carros.get(idCarro).getIdCarro() +  " e " + carros.get(idCarro2).getEquipe() + " " + carros.get(idCarro2).getIdCarro());
+                    System.out.println("Um acidente na pista " + carros.get(idCarro).getEscuderia() + " " + 
+                          carros.get(idCarro).getIdCarro() +  " e " + carros.get(idCarro2).getEscuderia() + " " + carros.get(idCarro2).getIdCarro());
                     carros.get(idCarro).setEvento(2);
                     carros.get(idCarro2).setEvento(2);
                   }
@@ -186,12 +192,12 @@ public class Corrida extends Thread{
                   }
                   break;
               case 5: //Troca de posição - Verifica se os carros ainda estão na corrida
-                  String equipe = carros.get(idCarro).getEquipe();
+                  String equipe = carros.get(idCarro).getEscuderia();
                   Carro c1 = carros.get(idCarro);
                   Carro c2 = null;
 
                   for(Carro c : carros){
-                      if(c.getEquipe().equals(equipe)){ //Carros precisam ser da mesma equipe
+                      if(c.getEscuderia().equals(equipe)){ //Carros precisam ser da mesma equipe
                           if(c1.getIdCarro() != c.getIdCarro())
                               c2 = c;
                       }
@@ -206,6 +212,45 @@ public class Corrida extends Thread{
 
             }
         }  
+    }
+    
+    /**
+     * Retorna uma cópia profunta do ArrayList passado por parâmetro
+     * @param copiar
+     * @return Uma cópia profunda de copiar
+     */
+    private static ArrayList <Carro> copiarCarros(ArrayList <Carro> copiar){
+        ArrayList <Carro> copia = new ArrayList<>();
+        
+        for(Carro carroCopiar : copiar){
+            Carro carroAux = new Carro(carroCopiar.getEscuderia(),
+                                        carroCopiar.getIdCarro(),
+                                        carroCopiar.getPosicaoAtual());
+            copia.add(carroAux);
+        }
+        
+        return copia;
+    }
+    
+    /**
+     * Retorna a quantidade de pontos em relação à posição na corrida.
+     * @param c
+     * @return 
+     */
+    public static short retornarPontosDaCorrida(Carro c){
+        switch (c.getPosicaoAtual()){
+            case 1: return 25;
+            case 2: return 18;
+            case 3: return 15;
+            case 4: return 12;
+            case 5: return 10;
+            case 6: return 8;
+            case 7: return 6;
+            case 8: return 4;
+            case 9: return 2;
+            case 10: return 1;
+            default: return 0;
+        }
     }
 
 }

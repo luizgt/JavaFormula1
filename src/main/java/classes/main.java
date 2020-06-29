@@ -14,61 +14,62 @@ import java.util.ArrayList;
 public class main {
     /**
      * @param args the command line arguments
+     * @throws java.lang.InterruptedException
      */
-    public static void main(String[] args) throws InterruptedException {
-        ArrayList <Corrida> corridas = new ArrayList<>();
+    public static void main(String[] args) throws InterruptedException{
+        ArrayList <Corrida> corridas = new ArrayList<>();      
+        ArrayList <Escuderia> escuderias = new ArrayList<>();
         
-        Piloto piloto1 = new Piloto("Luizinho");
-        Piloto piloto2 = new Piloto("Giulia");
-        
-        Mecanico mecanico1 = new Mecanico("Clovona");
-        Mecanico mecanico2 = new Mecanico("Bruninha");
-        Mecanico mecanico3 = new Mecanico("Levizinho");
-        Mecanico mecanico4 = new Mecanico("Tiaguinho");
-        
-        Engenheiro engenheiro1 = new Engenheiro("Milton");
-        Engenheiro engenheiro2 = new Engenheiro("Danilo");
-        
-        ArrayList <Carro> carros = new ArrayList();
-        carros.add(new Carro (1, "Mercedes", 54));
-        carros.add(new Carro (2, "Mercedes", 54));
-        carros.add(new Carro (1, "Ferrari", 45));
-        carros.add(new Carro (2, "Ferrari", 54));
-        carros.add(new Carro (1, "McLaren", 54));
-        carros.add(new Carro (2, "McLaren", 54));
-        carros.add(new Carro (1, "BMW", 54));
-        carros.add(new Carro (2, "BMW", 54));
-        
-        
-        Escuderia escuderia = new Escuderia("escuderia legal");
-        
-        boolean verificacao;
-        
-        verificacao = escuderia.adicionarEngenheiros(engenheiro1);
-//        if(verificacao){
-//            System.out.println("engenheiro cadastrado com sucesso!!");
-//        }
-        escuderia.adicionarEngenheiros(engenheiro2);
-        escuderia.adicionarMecanicos(mecanico1);
-        escuderia.adicionarMecanicos(mecanico2);
-        escuderia.adicionarMecanicos(mecanico3);
-        escuderia.adicionarMecanicos(mecanico4);
-        escuderia.adicionarPilotos(piloto1);
-        escuderia.adicionarPilotos(piloto2);
-        escuderia.adicionarCarros(carros.get(0));
-        escuderia.adicionarCarros(carros.get(1));
-        
-        String informacao = escuderia.informacoesEscuderia();
-        
-//        System.out.println(informacao);
+        Escuderia escMercedes = new Escuderia("Mercedes");
+            settingCarros(escMercedes);
+            settingPilotos(escMercedes);
+            settingEngenheiros(escMercedes);
+            settingMecanicos(escMercedes);
 
-        corridas.add(new Corrida("São Paulo", 99, carros));
-        corridas.add(new Corrida("Londres", 120, carros));
-        corridas.add(new Corrida("Tokio", 40, carros));
-        corridas.add(new Corrida("GP do Marrocos", 120, carros));
-        corridas.add(new Corrida("GP da Grã-Bretranha", 120, carros));
-        corridas.add(new Corrida("GP da Austrália", 120, carros));
-        corridas.add(new Corrida("GP dos Estados Unidos", 120, carros));
+        Escuderia escFerrari = new Escuderia("Ferrari");
+            settingCarros(escFerrari);
+            settingPilotos(escFerrari);
+            settingEngenheiros(escFerrari);
+            settingMecanicos(escFerrari);
+            
+        Escuderia escBMW = new Escuderia("BMW");
+            settingCarros(escBMW);
+            settingPilotos(escBMW);
+            settingEngenheiros(escBMW);
+            settingMecanicos(escBMW);
+        
+        
+        Escuderia escMcLaren = new Escuderia("McLaren");
+            settingCarros(escMcLaren);
+            settingPilotos(escMcLaren);
+            settingEngenheiros(escMcLaren);
+            settingMecanicos(escMcLaren);
+            
+        Escuderia escLotus = new Escuderia("Lotus Elise");
+            settingCarros(escLotus);
+            settingPilotos(escLotus);
+            settingEngenheiros(escLotus);
+            settingMecanicos(escLotus);
+            
+        Escuderia escRenault = new Escuderia("Renault");
+            settingCarros(escRenault);
+            settingPilotos(escRenault);
+            settingEngenheiros(escRenault);
+            settingMecanicos(escRenault);
+
+        escuderias.add(escMercedes);
+        escuderias.add(escFerrari);
+        escuderias.add(escBMW);
+        escuderias.add(escLotus);
+        escuderias.add(escRenault);
+        
+        corridas.add(new Corrida("São Paulo", 99));
+        corridas.add(new Corrida("Londres", 120));
+        corridas.add(new Corrida("Tokio", 40));
+        corridas.add(new Corrida("GP do Marrocos", 120));
+//        corridas.add(new Corrida("GP da Grã-Bretranha", 120));
+//        corridas.add(new Corrida("GP da Austrália", 120));
+//        corridas.add(new Corrida("GP dos Estados Unidos", 120));
 //        corridas.add(new Corrida("GP da Alemanha", 120, carros));
 //        corridas.add(new Corrida("GP do Bahrein", 120, carros));
 //        corridas.add(new Corrida("GP da Europa", 120, carros));
@@ -82,16 +83,31 @@ public class main {
 //        corridas.add(new Corrida("GP da Turquia", 120, carros));
 //        corridas.add(new Corrida("GP do Brasil", 120, carros));
         
-        Campeonato campeonato1 = new Campeonato(corridas, carros);
-        campeonato1.adicionarEscuderias(escuderia);
+        Campeonato campeonato1 = new Campeonato(corridas, escuderias);
         
-        campeonato1.IniciarCampeonato();
-//        corrida3.largada(); //a corrida esta acontecendo aqui por enquanto, apenas para teste!!!!!
+        campeonato1.IniciarCampeonato();        
+    }
+    
+    private static void settingPilotos(Escuderia escuderia){
+        escuderia.adicionarPilotos(new Piloto("Luizinho"));
+        escuderia.adicionarPilotos(new Piloto("Giulia"));
         
-//        String infoCampeonato = campeonato1.informacoesCampeonato();
-        
-//        System.out.println("\n\nCampeonato\n");
-//        System.out.println(infoCampeonato);
-        
+    }
+    
+    private static void settingMecanicos(Escuderia escuderia){
+        escuderia.adicionarMecanicos(new Mecanico("Clovona"));
+        escuderia.adicionarMecanicos(new Mecanico("Bruninha"));
+        escuderia.adicionarMecanicos(new Mecanico("Levizinho"));
+        escuderia.adicionarMecanicos(new Mecanico("Tiaguinho"));
+    }
+    
+    private static void settingEngenheiros(Escuderia escuderia){
+       escuderia.adicionarEngenheiros(new Engenheiro("Milton"));
+       escuderia.adicionarEngenheiros(new Engenheiro("Danilo"));
+    }
+    
+    private static void settingCarros(Escuderia escuderia){
+        escuderia.adicionarCarros(new Carro (1, escuderia.getNomeEscuderia(), 120));
+        escuderia.adicionarCarros(new Carro (2, escuderia.getNomeEscuderia(), 120));
     }
 }

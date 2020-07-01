@@ -5,6 +5,7 @@
  */
 package classes;
 
+import UI.uiPrincipal;
 import java.util.ArrayList;
 
 /**
@@ -17,56 +18,61 @@ public class main {
      * @throws java.lang.InterruptedException
      */
     public static void main(String[] args) throws InterruptedException{
-        ArrayList <Corrida> corridas = new ArrayList<>();      
-        ArrayList <Escuderia> escuderias = new ArrayList<>();
+        uiPrincipal principal = new uiPrincipal();
+        principal.setVisible(true);
+        principal.setTitle("Simulador de Corridas de Fórmula 1");
+        principal.toFront();
         
-        Escuderia escMercedes = new Escuderia("Mercedes");
-            settingCarros(escMercedes);
-            settingPilotos(escMercedes);
-            settingEngenheiros(escMercedes);
-            settingMecanicos(escMercedes);
-
-        Escuderia escFerrari = new Escuderia("Ferrari");
-            settingCarros(escFerrari);
-            settingPilotos(escFerrari);
-            settingEngenheiros(escFerrari);
-            settingMecanicos(escFerrari);
-            
-        Escuderia escBMW = new Escuderia("BMW");
-            settingCarros(escBMW);
-            settingPilotos(escBMW);
-            settingEngenheiros(escBMW);
-            settingMecanicos(escBMW);
-        
-        
-        Escuderia escMcLaren = new Escuderia("McLaren");
-            settingCarros(escMcLaren);
-            settingPilotos(escMcLaren);
-            settingEngenheiros(escMcLaren);
-            settingMecanicos(escMcLaren);
-            
-        Escuderia escLotus = new Escuderia("Lotus Elise");
-            settingCarros(escLotus);
-            settingPilotos(escLotus);
-            settingEngenheiros(escLotus);
-            settingMecanicos(escLotus);
-            
-        Escuderia escRenault = new Escuderia("Renault");
-            settingCarros(escRenault);
-            settingPilotos(escRenault);
-            settingEngenheiros(escRenault);
-            settingMecanicos(escRenault);
-
-        escuderias.add(escMercedes);
-        escuderias.add(escFerrari);
-        escuderias.add(escBMW);
-        escuderias.add(escLotus);
-        escuderias.add(escRenault);
-        
-        corridas.add(new Corrida("São Paulo", 99));
-        corridas.add(new Corrida("Londres", 120));
-        corridas.add(new Corrida("Tokio", 40));
-        corridas.add(new Corrida("GP do Marrocos", 120));
+//        ArrayList <Corrida> corridas = new ArrayList<>();      
+//        ArrayList <Escuderia> escuderias = new ArrayList<>();
+//        
+//        Escuderia escMercedes = new Escuderia("Mercedes");
+//            settingCarros(escMercedes);
+//            settingPilotos(escMercedes);
+//            settingEngenheiros(escMercedes);
+//            settingMecanicos(escMercedes);
+//
+//        Escuderia escFerrari = new Escuderia("Ferrari");
+//            settingCarros(escFerrari);
+//            settingPilotos(escFerrari);
+//            settingEngenheiros(escFerrari);
+//            settingMecanicos(escFerrari);
+//            
+//        Escuderia escBMW = new Escuderia("BMW");
+//            settingCarros(escBMW);
+//            settingPilotos(escBMW);
+//            settingEngenheiros(escBMW);
+//            settingMecanicos(escBMW);
+//        
+//        
+//        Escuderia escMcLaren = new Escuderia("McLaren");
+//            settingCarros(escMcLaren);
+//            settingPilotos(escMcLaren);
+//            settingEngenheiros(escMcLaren);
+//            settingMecanicos(escMcLaren);
+//            
+//        Escuderia escLotus = new Escuderia("Lotus Elise");
+//            settingCarros(escLotus);
+//            settingPilotos(escLotus);
+//            settingEngenheiros(escLotus);
+//            settingMecanicos(escLotus);
+//            
+//        Escuderia escRenault = new Escuderia("Renault");
+//            settingCarros(escRenault);
+//            settingPilotos(escRenault);
+//            settingEngenheiros(escRenault);
+//            settingMecanicos(escRenault);
+//
+//        escuderias.add(escMercedes);
+//        escuderias.add(escFerrari);
+//        escuderias.add(escBMW);
+//        escuderias.add(escLotus);
+//        escuderias.add(escRenault);
+//        
+//        corridas.add(new Corrida("São Paulo", 99));
+//        corridas.add(new Corrida("Londres", 120));
+//        corridas.add(new Corrida("Tokio", 120));
+//        corridas.add(new Corrida("GP do Marrocos", 120));
 //        corridas.add(new Corrida("GP da Grã-Bretranha", 120));
 //        corridas.add(new Corrida("GP da Austrália", 120));
 //        corridas.add(new Corrida("GP dos Estados Unidos", 120));
@@ -82,10 +88,10 @@ public class main {
 //        corridas.add(new Corrida("GP do México", 120, carros));
 //        corridas.add(new Corrida("GP da Turquia", 120, carros));
 //        corridas.add(new Corrida("GP do Brasil", 120, carros));
-        
-        Campeonato campeonato1 = new Campeonato(corridas, escuderias);
-        
-        campeonato1.IniciarCampeonato();        
+//        
+//        Campeonato campeonato1 = new Campeonato(corridas, escuderias);
+//        
+//        campeonato1.IniciarCampeonato();        
     }
     
     private static void settingPilotos(Escuderia escuderia){

@@ -165,28 +165,30 @@ public class Escuderia {
   }
   
   public String informacoesEscuderia(){
-      String resultado = "";
-      resultado = nomeEscuderia + "\n----------------------------\n";
+      String resultado = "----------------------------\n";
+      resultado = "\n>>" + nomeEscuderia;
       
-      resultado += "Engenheiros: ";
+      resultado += "\n>>Engenheiros: ";
       for(int i = 0; i < engenheiros.size(); i++){
           resultado += "\n" + engenheiros.get(i).getNome();
       }
-      resultado += "\n----------------------------";
-      resultado += "\nMecânicos: ";
+      //resultado += "\n----------------------------";
+      resultado += "\n>> Mecânicos: ";
       for(int i = 0; i < mecanicos.size(); i++){
           resultado += "\n" + mecanicos.get(i).getNome();
       }
-      resultado += "\n----------------------------";
-      resultado += "\nCarros: ";
+      //resultado += "\n----------------------------";
+      resultado += "\n>> Carros: ";
       for(int i = 0; i < carros.size(); i++){
           resultado += "\n" + carros.get(i).getIdCarro() +" " + carros.get(i).getCombustivel();
       }
-      resultado += "\n----------------------------";
-      resultado += "\nPilotos: ";
+      //resultado += "\n----------------------------";
+      resultado += "\n>> Pilotos: ";
       for(int i = 0; i < pilotos.size(); i++){
           resultado += "\n" + pilotos.get(i).getNome();
       }
+      resultado += "\n----------------------------";
+
       
       return resultado;
   }

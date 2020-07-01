@@ -9,6 +9,8 @@ import classes.Controlador;
 import classes.Corrida;
 import classes.Escuderia;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -76,7 +78,6 @@ public class uiPrincipal extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel8.setText("Luiz Thomaz");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/race.png"))); // NOI18N
         jLabel5.setText("jLabel5");
 
         jMenu3.setText("Campeonato");
@@ -214,7 +215,11 @@ public class uiPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void iniciarCampeonatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarCampeonatoActionPerformed
-        // TODO add your handling code here:
+        try {
+            sistema.iniciarCampeonato();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(uiPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_iniciarCampeonatoActionPerformed
 
     /**

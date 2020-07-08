@@ -120,9 +120,11 @@ public class Corrida extends Thread{
    * @void
    */
   public void largada(ArrayList <Carro> carrosDaCorrida) throws InterruptedException{   
+      String resultado = "";
       this.carros = carrosDaCorrida;
 
       System.out.println("\n\n\n> Iniciando corrida "+cidade+"\n");
+      resultado = "\n\n\n> Iniciando corrida "+cidade+"\n";
       
       Carro.setProximaPosicao(1);       //resetando o atributo static das posicoes
       boolean correndo = true;
@@ -145,7 +147,8 @@ public class Corrida extends Thread{
       Thread.sleep(1000);    //garantindo que todos os carros terminaram a corrida antes de ordena-los     
       carrosDaCorrida = Carro.ordenarCarros(carrosDaCorrida);
       
-      this.carros = copiarCarros(carrosDaCorrida);  //guardando resultado da corrida na Corrida      
+      this.carros = copiarCarros(carrosDaCorrida);  //guardando resultado da corrida na Corrida  
+      //return resultado;
   }
   
   @Override

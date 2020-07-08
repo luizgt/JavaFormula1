@@ -16,9 +16,9 @@ public class Controlador {
     private static ArrayList <Escuderia> escuderias = new ArrayList<>();
     
     public Controlador(){
-        corridas.add(new Corrida("São Paulo", 99));
-        corridas.add(new Corrida("Londres", 120));
-        corridas.add(new Corrida("Tokio", 120));
+        corridas.add(new Corrida("GP São Paulo", 99));
+        corridas.add(new Corrida("GP Londres", 120));
+        corridas.add(new Corrida("GP Tokio", 120));
         corridas.add(new Corrida("GP do Marrocos", 120));
         
         Escuderia escMercedes = new Escuderia("Mercedes");

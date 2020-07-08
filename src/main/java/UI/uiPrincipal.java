@@ -78,7 +78,9 @@ public class uiPrincipal extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel8.setText("Luiz Thomaz");
 
-        jLabel5.setText("jLabel5");
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("imagem aqui");
 
         jMenu3.setText("Campeonato");
 

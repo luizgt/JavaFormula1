@@ -285,15 +285,34 @@ public class Carro implements Runnable{
    * @param carros Carro - coleção de carros
    * @return ArrayList - Coleção de carros ordenados
    */
-  public static ArrayList <Carro> ordenarCarros(ArrayList <Carro> carros){
-      Collections.sort(carros, new compararPosicoes());
+  public static ArrayList <Carro> ordenarCarrosNaCorrida(ArrayList <Carro> carros){
+      Collections.sort(carros, new compararPosicoesNaCorrida());
       return carros;
   }
 
-  private static class compararPosicoes implements Comparator <Carro>{
+  private static class compararPosicoesNaCorrida implements Comparator <Carro>{
       @Override
       public int compare(Carro c1, Carro c2){
           if (c1.getPosicaoAtual() < c2.getPosicaoAtual())
+            return -1;
+          else return 1;
+      }
+  }
+
+  /**
+   * Retorna os carros ordenados de acordo com suas pontuações.
+   * @param carros Carro - coleção de carros
+   * @return ArrayList - Coleção de carros ordenados
+   */
+  public static ArrayList <Carro> ordenarCarrosNoCampeonato(ArrayList <Carro> carros){
+      Collections.sort(carros, new compararPosicoesNoCampeonato());
+      return carros;
+  }
+
+  private static class compararPosicoesNoCampeonato implements Comparator <Carro>{
+      @Override
+      public int compare(Carro c1, Carro c2){
+          if (c1.getQtdPontosNoCampeonato() > c2.getQtdPontosNoCampeonato())
             return -1;
           else return 1;
       }

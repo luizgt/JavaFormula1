@@ -117,9 +117,9 @@ public class Corrida extends Thread{
         this.carros = carros;
     }
 
-    public String getResultado() {
-        return resultado;
-    }
+//    public String getResultado() {
+//        return resultado;
+//    }
 
     public void setResultado(String resultado) {
         this.resultado = resultado;
@@ -138,44 +138,41 @@ public class Corrida extends Thread{
      * @throws java.lang.InterruptedException
    */
   public void largada(ArrayList <Carro> carrosDaCorrida) throws InterruptedException{   
-      this.carros = carrosDaCorrida;
-      
-      uiPrincipal.sistema.escreverNaTela("\n> Iniciando corrida "+cidade+"\n");
+    this.carros = carrosDaCorrida;
 
-      Carro.setProximaPosicao(1);       //resetando o atributo static das posicoes
-      boolean correndo = true;
-      boolean fim = false;
-      Status s = new Status(correndo, fim);
-      chuva = false; //Ainda não está chovendo
-      
-      for (Carro c : carrosDaCorrida){  //preparando as corridas 
-          c.setQtdVoltas(qtdVoltas);    //setando a quantidade de voltas para cada carro
-          c.setEvento(0);               //Setando o evento para 0 de novo
-          c.setChuva(false);            //Setando que não está chovendo
-          c.setStatus(s);               //Setando status do carro
-      }
-      
-      for (Carro c : carrosDaCorrida) {  //disparando as threads
-          Thread td = new Thread(c);
-          td.start();
-      }
-      
-      run(); //Uma thread em paralelo que controla os eventos
-      
-      Thread.sleep(1000);    //garantindo que todos os carros terminaram a corrida antes de ordena-los     
-      
-      carrosDaCorrida = Carro.ordenarCarros(carrosDaCorrida);
-      uiPrincipal.sistema.escreverNaTela("\n\n> Corrida "+cidade+" finalizada!\n");
-      
-      for(Carro c : carros){
-          short pontuacao = c.getQtdPontosNoCampeonato();
-          short novaPto = retornarPontosDaCorrida(c);
-          c.setQtdPontosNoCampeonato((short)(pontuacao + novaPto));
-          resultado += "\nCarro: " + c.getEscuderia() + " " + c.getIdCarro() + " ptos: " + c.getQtdPontosNoCampeonato();
-      }
+    uiPrincipal.sistema.escreverNaTela("\n> Iniciando corrida "+cidade+"\n");
 
-      this.carros = copiarCarros(carrosDaCorrida);  //guardando resultado da corrida na Corrida
-      
+    Carro.setProximaPosicao(1);       //resetando o atributo static das posicoes
+    boolean correndo = true;
+    boolean fim = false;
+    Status s = new Status(correndo, fim);
+    chuva = false; //Ainda não está chovendo
+
+    for (Carro c : carrosDaCorrida){  //preparando as corridas 
+        c.setQtdVoltas(qtdVoltas);    //setando a quantidade de voltas para cada carro
+        c.setEvento(0);               //Setando o evento para 0 de novo
+        c.setChuva(false);            //Setando que não está chovendo
+        c.setStatus(s);               //Setando status do carro
+    }
+
+    for (Carro c : carrosDaCorrida) {  //disparando as threads
+        Thread td = new Thread(c);
+        td.start();
+    }
+
+    run(); //Uma thread em paralelo que controla os eventos
+    Thread.sleep(1000);    //garantindo que todos os carros terminaram a corrida antes de ordena-los     
+
+    carrosDaCorrida = Carro.ordenarCarrosNaCorrida(carrosDaCorrida);
+    uiPrincipal.sistema.escreverNaTela("\n\n> Corrida "+cidade+" finalizada!\n");
+
+    for(Carro c : carros){
+        short pontuacao = c.getQtdPontosNoCampeonato();
+        short novaPto = retornarPontosDaCorrida(c);
+        c.setQtdPontosNoCampeonato((short)(pontuacao + novaPto));
+    }
+
+    this.carros = copiarCarros(carrosDaCorrida);  //guardando resultado da corrida na Corrida
   }
   
   @Override
@@ -272,4 +269,18 @@ public class Corrida extends Thread{
         }
     }
 
+    /**
+     * Retorna o resultado da corrida.
+     * @return String - Resultado da Corrida.
+     */
+    public String retornarResultado(){
+        String retorno = "";
+        ArrayList <Carro> cpCarros = carros;
+        cpCarros = Carro.ordenarCarrosNoCampeonato(cpCarros);
+        
+        for(Carro c : cpCarros)
+            retorno += "\nCarro: " + c.getEscuderia() + " " + c.getIdCarro() + " ptos: " + c.getQtdPontosNoCampeonato();
+        return retorno;
+    }
+    
 }

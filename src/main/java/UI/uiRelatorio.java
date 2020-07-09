@@ -13,6 +13,8 @@ public class uiRelatorio extends javax.swing.JDialog {
 
     /**
      * Creates new form uiCorridas
+     * @param parent
+     * @param modal
      */
     public uiRelatorio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -41,6 +43,7 @@ public class uiRelatorio extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Corridas");
+        setResizable(false);
 
         relatorioCorridas.setEditable(false);
         relatorioCorridas.setColumns(20);

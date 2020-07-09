@@ -107,6 +107,14 @@ public class Campeonato {
   public ArrayList<Corrida> getCorridas () {
     return corridas;
   }
+  
+  /**
+   * Get the value of carros
+   * @return the value of carros
+   */
+  public ArrayList<Carro> getCarros () {
+    return carros;
+  }
 
   //
   // Other methods
@@ -164,12 +172,13 @@ public class Campeonato {
 
     for(Corrida corrida : corridas){
         uiPrincipal.sistema.escreverNaTela("\n\n** Posições na Corrida **");
-//        System.out.println("\n Posições no Campeonato");
         for(Carro c : corrida.getPosicoes()){
             c.setQtdPontosNoCampeonato(Corrida.retornarPontosDaCorrida(c));
             uiPrincipal.sistema.escreverNaTela("\n"+c.getEscuderia()+" | "+c.getPosicaoAtual());
         }
     }
+    
+    carros = Carro.ordenarCarrosNoCampeonato(carros);
   }
 
   

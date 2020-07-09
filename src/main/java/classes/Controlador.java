@@ -15,10 +15,14 @@ import java.util.logging.Logger;
  * @author Giulia
  */
 public class Controlador {
-    private static ArrayList <Corrida> corridas = new ArrayList<>();      
-    private static ArrayList <Escuderia> escuderias = new ArrayList<>();
+    private Campeonato campeonato;
+    private ArrayList <Corrida> corridas;      
+    private ArrayList <Escuderia> escuderias;
     
     public Controlador(){
+        corridas = new ArrayList<>();      
+        escuderias = new ArrayList<>();
+        
         corridas.add(new Corrida("GP São Paulo", 99));
         corridas.add(new Corrida("GP Londres", 120));
         corridas.add(new Corrida("GP Tokio", 120));
@@ -91,11 +95,11 @@ public class Controlador {
         escuderia.adicionarCarros(new Carro (2, escuderia.getNomeEscuderia(), 120));
     }
     
-    public static void adicionarCorrida(String cidade, int numVoltas){
+    public void adicionarCorrida(String cidade, int numVoltas){
         corridas.add(new Corrida(cidade, numVoltas));
     }
     
-    public static String relatorioCorridas(){
+    public String relatorioCorridas(){
         String relatorio = "";
         for(Corrida c : corridas){
             relatorio += c.getCidade()+ " - número de voltas: " + c.getQtdVoltas() + "\n" ;
@@ -103,7 +107,7 @@ public class Controlador {
         return relatorio;
     }
     
-    public static String relatorioEscuderias(){
+    public String relatorioEscuderias(){
         String relatorio = "";
         for(Escuderia e : escuderias){
             relatorio += e.informacoesEscuderia();
@@ -116,8 +120,8 @@ public class Controlador {
     }
     
     public void iniciarCampeonato() throws InterruptedException{
-        Campeonato campeonato1 = new Campeonato(corridas, escuderias);
-        campeonato1.IniciarCampeonato();
+        campeonato = new Campeonato(corridas, escuderias);
+        campeonato.IniciarCampeonato();
     }
     
     public void escreverNaTela(String texto){
@@ -129,23 +133,15 @@ public class Controlador {
         }
     }
     
+    /**
+     * Retorna uma String com o resultado do campeonato, já ordenado.
+     * @return String
+     */
     public String resultadoCampeonato(){
         String resultado = "";
-        int aux = corridas.size();
-        Corrida corrida = corridas.get(aux - 1);
-        resultado = corrida.getResultado();
-//        System.out.println("Cidade" + corrida.getCidade());
-//        for(Carro c : corrida.getCarros()){
-//            resultado += "\nCarro: " + c.getEscuderia() + " " + c.getIdCarro() + " ptos: " + c.getQtdPontosNoCampeonato();
-//        }
-//        for(Corrida corrida : corridas){
-//            //resultado += "\nCorrida: " + corrida.getCidade();
-//            ArrayList<Carro> carros = corrida.getCarros();
-//            for(Carro c : carros ){
-//                resultado += "\nCarro: " + c.getEscuderia() + " " + c.getIdCarro() + " ptos: " + c.getQtdPontosNoCampeonato();
-//            }
-//            resultado += "\n---------------\n";
-//        }
+        for(Carro c : campeonato.getCarros())
+            resultado += "Carro: " + c.getEscuderia() + " " + c.getIdCarro() + " ptos: " + c.getQtdPontosNoCampeonato()+"\n";
+        
         return resultado;
     }
 }

@@ -69,21 +69,21 @@ public class Controlador {
     }
     
     private static void settingPilotos(Escuderia escuderia){
-        escuderia.adicionarPilotos(new Piloto("Luizinho"));
+        escuderia.adicionarPilotos(new Piloto("Luiz"));
         escuderia.adicionarPilotos(new Piloto("Giulia"));
         
     }
     
     private static void settingMecanicos(Escuderia escuderia){
-        escuderia.adicionarMecanicos(new Mecanico("Clovona"));
-        escuderia.adicionarMecanicos(new Mecanico("Bruninha"));
-        escuderia.adicionarMecanicos(new Mecanico("Levizinho"));
-        escuderia.adicionarMecanicos(new Mecanico("Tiaguinho"));
+        escuderia.adicionarMecanicos(new Mecanico("Marcelo"));
+        escuderia.adicionarMecanicos(new Mecanico("Carlos"));
+        escuderia.adicionarMecanicos(new Mecanico("Paula"));
+        escuderia.adicionarMecanicos(new Mecanico("Maria"));
     }
     
     private static void settingEngenheiros(Escuderia escuderia){
-       escuderia.adicionarEngenheiros(new Engenheiro("Milton"));
-       escuderia.adicionarEngenheiros(new Engenheiro("Danilo"));
+       escuderia.adicionarEngenheiros(new Engenheiro("William"));
+       escuderia.adicionarEngenheiros(new Engenheiro("Beatriz"));
     }
     
     private static void settingCarros(Escuderia escuderia){
@@ -127,5 +127,25 @@ public class Controlador {
         } catch (InterruptedException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String resultadoCampeonato(){
+        String resultado = "";
+        int aux = corridas.size();
+        Corrida corrida = corridas.get(aux - 1);
+        resultado = corrida.getResultado();
+//        System.out.println("Cidade" + corrida.getCidade());
+//        for(Carro c : corrida.getCarros()){
+//            resultado += "\nCarro: " + c.getEscuderia() + " " + c.getIdCarro() + " ptos: " + c.getQtdPontosNoCampeonato();
+//        }
+//        for(Corrida corrida : corridas){
+//            //resultado += "\nCorrida: " + corrida.getCidade();
+//            ArrayList<Carro> carros = corrida.getCarros();
+//            for(Carro c : carros ){
+//                resultado += "\nCarro: " + c.getEscuderia() + " " + c.getIdCarro() + " ptos: " + c.getQtdPontosNoCampeonato();
+//            }
+//            resultado += "\n---------------\n";
+//        }
+        return resultado;
     }
 }

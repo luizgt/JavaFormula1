@@ -282,8 +282,8 @@ public class Carro implements Runnable{
   
   /**
    * Retorna os carros ordenados de acordo com suas posições.
-   * @param carros
-   * @return 
+   * @param carros Carro - coleção de carros
+   * @return ArrayList - Coleção de carros ordenados
    */
   public static ArrayList <Carro> ordenarCarros(ArrayList <Carro> carros){
       Collections.sort(carros, new compararPosicoes());

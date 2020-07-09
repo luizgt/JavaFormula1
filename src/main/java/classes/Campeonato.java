@@ -154,8 +154,7 @@ public class Campeonato {
   
   /**
    * Inicia o campeonato, iterando entre as corridas adicionadas.
-     * @throws java.lang.InterruptedException
-   * @void
+   * @throws java.lang.InterruptedException
    */
   public void IniciarCampeonato() throws InterruptedException{
     for(Corrida corrida : corridas){
@@ -164,7 +163,7 @@ public class Campeonato {
     }
 
     for(Corrida corrida : corridas){
-        uiPrincipal.sistema.escreverNaTela("\n\n** Posições no Campeonato **");
+        uiPrincipal.sistema.escreverNaTela("\n\n** Posições na Corrida **");
 //        System.out.println("\n Posições no Campeonato");
         for(Carro c : corrida.getPosicoes()){
             c.setQtdPontosNoCampeonato(Corrida.retornarPontosDaCorrida(c));

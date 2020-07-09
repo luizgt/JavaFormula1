@@ -20,6 +20,7 @@ public class Corrida extends Thread{
   private String cidade;
   private int qtdVoltas;
   private int voltaAtual;
+  private String resultado = "";
   
   //
   // Constructors
@@ -107,6 +108,24 @@ public class Corrida extends Thread{
   public int getQtdVoltas(){
      return qtdVoltas;
   }
+
+    public ArrayList<Carro> getCarros() {
+        return carros;
+    }
+
+    public void setCarros(ArrayList<Carro> carros) {
+        this.carros = carros;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
+  
+  
   
   //
   // Other methods
@@ -114,10 +133,9 @@ public class Corrida extends Thread{
 
   
   /**
-   * Inicia a corrida e retorna a posicao dos carros
-     * @param carrosDaCorrida
+   * Inicia a corrida e retorna a posicao dos carros 
+     * @param carrosDaCorrida Carro - ArrayList de Carros
      * @throws java.lang.InterruptedException
-   * @void
    */
   public void largada(ArrayList <Carro> carrosDaCorrida) throws InterruptedException{   
       this.carros = carrosDaCorrida;
@@ -148,8 +166,16 @@ public class Corrida extends Thread{
       
       carrosDaCorrida = Carro.ordenarCarros(carrosDaCorrida);
       uiPrincipal.sistema.escreverNaTela("\n\n> Corrida "+cidade+" finalizada!\n");
+      
+      for(Carro c : carros){
+          short pontuacao = c.getQtdPontosNoCampeonato();
+          short novaPto = retornarPontosDaCorrida(c);
+          c.setQtdPontosNoCampeonato((short)(pontuacao + novaPto));
+          resultado += "\nCarro: " + c.getEscuderia() + " " + c.getIdCarro() + " ptos: " + c.getQtdPontosNoCampeonato();
+      }
 
       this.carros = copiarCarros(carrosDaCorrida);  //guardando resultado da corrida na Corrida
+      
   }
   
   @Override

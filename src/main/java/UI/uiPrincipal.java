@@ -21,6 +21,8 @@ public class uiPrincipal extends javax.swing.JFrame {
      */
     public uiPrincipal() {
         initComponents();
+        pontosButton.setEnabled(false);
+
     }
 
     /**
@@ -40,6 +42,7 @@ public class uiPrincipal extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         log_corrida = new javax.swing.JTextArea();
+        pontosButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -52,18 +55,18 @@ public class uiPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel1.setText("Desenvolvedores");
 
-        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Lucida Bright", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 0, 0));
         jLabel3.setText("Simulador de");
 
-        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Lucida Bright", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 0, 0));
         jLabel4.setText("Formula 1");
 
-        iniciarCampeonato.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        iniciarCampeonato.setFont(new java.awt.Font("Lucida Bright", 1, 14)); // NOI18N
         iniciarCampeonato.setText("Iniciar Campeonato!");
         iniciarCampeonato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,16 +74,25 @@ public class uiPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel7.setText("Giulia Campos");
 
-        jLabel8.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         jLabel8.setText("Luiz Thomaz");
 
         log_corrida.setEditable(false);
         log_corrida.setColumns(20);
+        log_corrida.setFont(new java.awt.Font("Lucida Bright", 0, 12)); // NOI18N
         log_corrida.setRows(5);
         jScrollPane1.setViewportView(log_corrida);
+
+        pontosButton.setFont(new java.awt.Font("Lucida Bright", 0, 14)); // NOI18N
+        pontosButton.setText("Obter Pontuações");
+        pontosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pontosButtonActionPerformed(evt);
+            }
+        });
 
         jMenu3.setText("Campeonato");
 
@@ -138,27 +150,29 @@ public class uiPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(229, 229, 229)
-                                    .addComponent(jLabel3))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(252, 252, 252)
-                                    .addComponent(jLabel4)))
-                            .addGap(116, 116, 116)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(229, 229, 229)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(252, 252, 252)
+                                .addComponent(jLabel4)))
+                        .addGap(116, 116, 116)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(iniciarCampeonato)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(iniciarCampeonato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pontosButton)
+                .addGap(134, 134, 134))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,9 +191,11 @@ public class uiPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)))
                 .addGap(23, 23, 23)
-                .addComponent(iniciarCampeonato)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iniciarCampeonato)
+                    .addComponent(pontosButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -218,10 +234,17 @@ public class uiPrincipal extends javax.swing.JFrame {
     private void iniciarCampeonatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarCampeonatoActionPerformed
         try {
             sistema.iniciarCampeonato();
+            pontosButton.setEnabled(true);
         } catch (InterruptedException ex) {
             Logger.getLogger(uiPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_iniciarCampeonatoActionPerformed
+
+    private void pontosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pontosButtonActionPerformed
+        uiRelatorio uiPontucao = new uiRelatorio(this, true);
+        uiPontucao.setRelatorio("Pontuação Final", sistema.resultadoCampeonato());
+        uiPontucao.setVisible(true);
+    }//GEN-LAST:event_pontosButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,6 +302,7 @@ public class uiPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTextArea log_corrida;
+    private javax.swing.JButton pontosButton;
     // End of variables declaration//GEN-END:variables
 }
 

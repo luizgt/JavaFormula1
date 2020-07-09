@@ -5,7 +5,10 @@
  */
 package classes;
 
+import UI.uiPrincipal;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -108,12 +111,21 @@ public class Controlador {
         return relatorio;
     }
     
-    public static void adicionarEscuderia(Escuderia e){
+    public void adicionarEscuderia(Escuderia e){
         escuderias.add(e);
     }
     
-    public static void iniciarCampeonato() throws InterruptedException{
+    public void iniciarCampeonato() throws InterruptedException{
         Campeonato campeonato1 = new Campeonato(corridas, escuderias);
         campeonato1.IniciarCampeonato();
+    }
+    
+    public void escreverNaTela(String texto){
+        try {
+            Thread.sleep(50);
+            uiPrincipal.setTextLog(texto);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

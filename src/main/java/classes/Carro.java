@@ -1,5 +1,6 @@
 package classes;
 
+import UI.uiPrincipal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -223,27 +224,25 @@ public class Carro implements Runnable{
     return qtdPontosNoCampeonato;
   }
   
-  
   //
   // Other methods
   //
   
   @Override
   public void run(){
-    for(voltaAtual = 0; voltaAtual < qtdVoltas; voltaAtual++){
-//        System.out.println(equipe + " | " + (voltaAtual+1) + " | Combustível: " + combustivel);
-        
+    for(voltaAtual = 0; voltaAtual < qtdVoltas; voltaAtual++){        
         combustivel -= 2;   //gastando combustivel a cada volta
         if(combustivel <= 0){
-            System.out.println("Carro "+id+" da equipe "+escuderia+" parou para abastecer!");
+            uiPrincipal.sistema.escreverNaTela("\nCarro "+id+" da equipe "+escuderia+" parou para abastecer!");
             combustivel = Mecanico.abastecerCarro();
+            uiPrincipal.sistema.escreverNaTela("\nCarro "+id+" da equipe "+escuderia+" abastecido!");
         }
         
-        if(evento == 1){ //Está chovendo
-            if(!chuva){ //Se ainda não estava chovendo, agora está
+        if(evento == 1){ //Esta chovendo
+            if(!chuva){ //Se ainda não estava chovendo, agora esta
                 status.setPitstop(true);
                 chuva = true;
-                Engenheiro.chamarTrocaDePneu(escuderia, id);
+                uiPrincipal.sistema.escreverNaTela(Engenheiro.chamarTrocaDePneu(escuderia, id));
                 status.setPitstop(false);
             }
             evento = 0; //Volta para 0 o evento
@@ -251,36 +250,34 @@ public class Carro implements Runnable{
         
         if(evento == 2){ //Carro envolvido em acidente
             status.setPitstop(true);
-            Engenheiro.acidenteNaPista(escuderia, id);
+            uiPrincipal.sistema.escreverNaTela(Engenheiro.acidenteNaPista(escuderia, id));
             evento = 0;
             status.setPitstop(false);
         }
         
         if(evento == 3){ //Carro no pitstop
             status.setPitstop(true);
-            Engenheiro.chamarPitstop(escuderia, id);
+            uiPrincipal.sistema.escreverNaTela(Engenheiro.chamarPitstop(escuderia, id));
             evento = 0;
             status.setPitstop(false);
         }
         
         if(evento == 4){ //Carro quebrado
             status.setPitstop(true);
-            Engenheiro.chamarReparoCarro(escuderia, id);
+            uiPrincipal.sistema.escreverNaTela(Engenheiro.chamarReparoCarro(escuderia, id));
             evento = 0;
             status.setPitstop(false);
         }
         
         if(evento == 5){ //Troca de posição
-            Engenheiro.trocarPosicao(escuderia);
+            uiPrincipal.sistema.escreverNaTela(Engenheiro.trocarPosicao(escuderia));
             evento = 0;
         }
-        
     }
     posicaoAtual = proximaPosicao;  //carro finaliza a corrida e recebe a posicao disponivel
     proximaPosicao++;   //atualiza a posicao para o proximo a finalizar a corrida
     status.setTerminouCorrida(true);
     status.setCorrendo(false);
-    //System.out.println("Carro "+id+" da equipe "+equipe+" terminou na posição: "+posicaoAtual+"!");
   }
   
   /**

@@ -1,6 +1,7 @@
 package classes;
 
 
+import UI.uiPrincipal;
 import java.util.ArrayList;
 
 
@@ -148,7 +149,7 @@ public class Campeonato {
     
     resultado += "\n----------------------------" + "\nQuantidade de corridas: " + qtdCorridas + "\nCorrida atual: " + corridaAtual;
       
-      return resultado;
+    return resultado;
   }
   
   /**
@@ -161,13 +162,13 @@ public class Campeonato {
         corrida.largada(carros);  //recebe o resultado da corrida
         Thread.sleep(1000);   //garante a finalizacao da corrida para iniciar a proxima
     }
-          
+
     for(Corrida corrida : corridas){
-        
-        System.out.println("\n Posições no Campeonato");
+        uiPrincipal.sistema.escreverNaTela("\n\n** Posições no Campeonato **");
+//        System.out.println("\n Posições no Campeonato");
         for(Carro c : corrida.getPosicoes()){
             c.setQtdPontosNoCampeonato(Corrida.retornarPontosDaCorrida(c));
-            System.out.println(c.getEscuderia()+" | "+c.getPosicaoAtual());
+            uiPrincipal.sistema.escreverNaTela("\n"+c.getEscuderia()+" | "+c.getPosicaoAtual());
         }
     }
   }

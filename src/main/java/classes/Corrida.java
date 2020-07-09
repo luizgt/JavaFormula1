@@ -1,6 +1,6 @@
 package classes;
 
-
+import UI.uiPrincipal;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -120,40 +120,40 @@ public class Corrida extends Thread{
    * @void
    */
   public void largada(ArrayList <Carro> carrosDaCorrida) throws InterruptedException{   
-      String resultado = "";
       this.carros = carrosDaCorrida;
-
-      System.out.println("\n\n\n> Iniciando corrida "+cidade+"\n");
-      resultado = "\n\n\n> Iniciando corrida "+cidade+"\n";
       
+      uiPrincipal.sistema.escreverNaTela("\n> Iniciando corrida "+cidade+"\n");
+
       Carro.setProximaPosicao(1);       //resetando o atributo static das posicoes
       boolean correndo = true;
       boolean fim = false;
       Status s = new Status(correndo, fim);
       chuva = false; //Ainda não está chovendo
       
-      for (Carro c : carrosDaCorrida){   
-          c.setQtdVoltas(qtdVoltas); //setando a quantidade de voltas para cada carro
-          c.setEvento(0); //Setando o evento para 0 de novo
-          c.setChuva(false); //Setando que não está chovendo
-          c.setStatus(s); //Setando status do carro
+      for (Carro c : carrosDaCorrida){  //preparando as corridas 
+          c.setQtdVoltas(qtdVoltas);    //setando a quantidade de voltas para cada carro
+          c.setEvento(0);               //Setando o evento para 0 de novo
+          c.setChuva(false);            //Setando que não está chovendo
+          c.setStatus(s);               //Setando status do carro
       }
-      for (Carro c : carrosDaCorrida) {  //executando as threads
-          Thread td = new Thread(c);    //prepara a execucao da classe runnable como uma thread
+      
+      for (Carro c : carrosDaCorrida) {  //disparando as threads
+          Thread td = new Thread(c);
           td.start();
       }
+      
       run(); //Uma thread em paralelo que controla os eventos
       
       Thread.sleep(1000);    //garantindo que todos os carros terminaram a corrida antes de ordena-los     
-      carrosDaCorrida = Carro.ordenarCarros(carrosDaCorrida);
       
-      this.carros = copiarCarros(carrosDaCorrida);  //guardando resultado da corrida na Corrida  
-      //return resultado;
+      carrosDaCorrida = Carro.ordenarCarros(carrosDaCorrida);
+      uiPrincipal.sistema.escreverNaTela("\n\n> Corrida "+cidade+" finalizada!\n");
+
+      this.carros = copiarCarros(carrosDaCorrida);  //guardando resultado da corrida na Corrida
   }
   
   @Override
     public void run(){
-        
         for(voltaAtual = 0; voltaAtual < qtdVoltas; voltaAtual++){
             Random random = new Random();
       
@@ -167,10 +167,9 @@ public class Corrida extends Thread{
             switch(e){
               case 1: //Chuva para todos
                   if(!chuva){ //Se ainda não estava chovendo, agora está chovendo
-                      System.out.println("Começou a chover");
-                    for(Carro c: carros){
+                    uiPrincipal.sistema.escreverNaTela("\nComeçou a chover!");
+                    for(Carro c: carros) 
                         c.setEvento(1);
-                    }
                   }
                   chuva = true;
                   break;
@@ -178,41 +177,32 @@ public class Corrida extends Thread{
                   //Carros em acidente são trocados ou retirados da corrida (??)
                   //Por enquanto os carros estão sendo "substituídos" 
                   if((carros.get(idCarro).getStatus().isCorrendo())&&(carros.get(idCarro2).getStatus().isCorrendo())){
-                    System.out.println("Um acidente na pista " + carros.get(idCarro).getEscuderia() + " " + 
-                          carros.get(idCarro).getIdCarro() +  " e " + carros.get(idCarro2).getEscuderia() + " " + carros.get(idCarro2).getIdCarro());
+                    uiPrincipal.sistema.escreverNaTela("\nUm acidente na pista " + carros.get(idCarro).getEscuderia() + " " + carros.get(idCarro).getIdCarro() +  " e " + carros.get(idCarro2).getEscuderia() + " " + carros.get(idCarro2).getIdCarro());
                     carros.get(idCarro).setEvento(2);
                     carros.get(idCarro2).setEvento(2);
                   }
                   break;
               case 3: //Carro no pitstop - Verifica se o carro ainda está na corrida
-                  if(carros.get(idCarro).getStatus().isCorrendo()){
+                  if(carros.get(idCarro).getStatus().isCorrendo())
                     carros.get(idCarro).setEvento(3);
-                  }
                   break;
               case 4: //Carro quebrado - Verifica se o carro ainda está na corrida
-                  if(carros.get(idCarro).getStatus().isCorrendo()){
+                  if(carros.get(idCarro).getStatus().isCorrendo())
                       carros.get(idCarro).setEvento(4);
-                  }
                   break;
               case 5: //Troca de posição - Verifica se os carros ainda estão na corrida
                   String equipe = carros.get(idCarro).getEscuderia();
                   Carro c1 = carros.get(idCarro);
                   Carro c2 = null;
 
-                  for(Carro c : carros){
-                      if(c.getEscuderia().equals(equipe)){ //Carros precisam ser da mesma equipe
-                          if(c1.getIdCarro() != c.getIdCarro())
-                              c2 = c;
-                      }
-                  }
+                  for(Carro c : carros)
+                    if(c.getEscuderia().equals(equipe) && c1.getIdCarro() != c.getIdCarro()) //Carros precisam ser da mesma equipe
+                        c2 = c;
                   
-                   if((c1.getStatus().isCorrendo())&&(c2.getStatus().isCorrendo())){
+                   if((c2.getStatus().isCorrendo())&&(c1.getStatus().isCorrendo()))
                     carros.get(idCarro).setEvento(5);
-                   }
                   break;
-              default:
-                  break;
-
+              default: break;
             }
         }  
     }

@@ -1,12 +1,12 @@
 package classes;
 
 
-
 /**
  * Class Mecanico
  */
 public class Mecanico extends funcionario{
 
+    
     public Mecanico(String newNome) {
         super(newNome);
     }
@@ -17,10 +17,11 @@ public class Mecanico extends funcionario{
   //
 
   /**
-   * Report troca de pneus
+   * Report troca de pneus.
+   * @return A String sobre a troca de pneu.
    */
-  public static void trocarPneus(String equipe, int id){
-      System.out.println("Pneus trocados para chuva equipe: " + equipe + " " + id);
+  public static String trocarPneus(String equipe, int id){
+      return ("\nPneus trocados para chuva equipe: " + equipe + " " + id);
   }
 
 
@@ -29,29 +30,33 @@ public class Mecanico extends funcionario{
    * @return the value of new gasoline
    */
   public static int abastecerCarro(){
-      System.out.println("Mecânico abasteceu o carro!");
       return 150;
   }
   
   /**
-   * Report um acidente entre os carros
+   * Retorna uma mensagem sobre carros consertados.
+   * @return String com mensagem sobre conserto.
    */
-  public static void acidenteCarro(String equipe, int id){
-      System.out.println("Carro " + equipe + " " + id + " consertado");
+  public static String acidenteCarro(String equipe, int id){
+      return ("\nCarro " + equipe + " " + id + " consertado");
   }
   
   /**
-   * Report carro no pitstop
+   * Retorna uma mensagem sobre carro parado no pitstop.
+   * @return String com mensagem sobre parada no pitstop.
    */
-  public static void pitstop(String equipe, int id){
-      System.out.println("Carro " + equipe + " " + id + " no pitstop");
+  public static String pitstop(String equipe, int id){
+      return ("\nCarro " + equipe + " " + id + " no pitstop");
   }
   
   /**
-   * Report um carro quebrado
+   * Retorna uma mensagem sobre o carro quebrado.
+   * @param equipe
+   * @param id
+   * @return String com a mensagem sobre carro quebrado.
    */
-  public static void carroQuebrado(String equipe, int id){
-      System.out.println("Carro " + equipe + " " + id + " quebrado");
+  public static String carroQuebrado(String equipe, int id){
+      return ("\nCarro " + equipe + " " + id + " quebrado");
   }
 
 

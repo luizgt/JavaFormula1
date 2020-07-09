@@ -310,7 +310,7 @@ public class uiCadastroEscuderia extends javax.swing.JDialog {
         novaEscuderia.adicionarMecanicos(new Mecanico(nomeMecanico4.getText()));
         
         uiPrincipal.sistema.adicionarEscuderia(novaEscuderia);
-        
+
         msgFinal.setText("Escuderia Cadastrada!!");
         msgFinal.setVisible(true);
     }//GEN-LAST:event_cadastrarEscuderiaActionPerformed

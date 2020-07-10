@@ -9,12 +9,12 @@ package UI;
  *
  * @author luizgt
  */
-public class uiRemoverEscuderia extends javax.swing.JFrame {
-    private int controlador;
+public class uiRemoverCorrida extends javax.swing.JFrame {
+    private int controlador = 0;
     /**
-     * Creates new form uiRemoverEscuderia
+     * Creates new form uiRemoverCorrida
      */
-    public uiRemoverEscuderia() {
+    public uiRemoverCorrida() {
         initComponents();
     }
 
@@ -27,9 +27,9 @@ public class uiRemoverEscuderia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        nomeEscuderia = new javax.swing.JLabel();
-        anterior = new javax.swing.JButton();
+        nomeCorrida = new javax.swing.JLabel();
         excluir = new javax.swing.JButton();
+        anterior = new javax.swing.JButton();
         proximo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -40,17 +40,17 @@ public class uiRemoverEscuderia extends javax.swing.JFrame {
             }
         });
 
-        anterior.setText("<");
-        anterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                anteriorActionPerformed(evt);
-            }
-        });
-
         excluir.setText("Excluir");
         excluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 excluirActionPerformed(evt);
+            }
+        });
+
+        anterior.setText("<");
+        anterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anteriorActionPerformed(evt);
             }
         });
 
@@ -68,12 +68,12 @@ public class uiRemoverEscuderia extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nomeEscuderia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nomeCorrida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(anterior)
-                        .addGap(110, 110, 110)
+                        .addGap(138, 138, 138)
                         .addComponent(excluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                         .addComponent(proximo)))
                 .addContainerGap())
         );
@@ -81,42 +81,37 @@ public class uiRemoverEscuderia extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nomeEscuderia, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nomeCorrida, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(proximo)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(anterior)
                         .addComponent(excluir)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        nomeEscuderia.setText(uiPrincipal.sistema.getEscuderias().get(0).getNomeEscuderia());
-        anterior.setEnabled(false);
-    }//GEN-LAST:event_formWindowActivated
-
     private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
-        uiPrincipal.sistema.removerEscuderia(controlador);
+        uiPrincipal.sistema.removerCorrida(controlador);
         controlador = 0;
-        
-        if (uiPrincipal.sistema.getEscuderias().isEmpty()){
+
+        if (uiPrincipal.sistema.getCorridas().isEmpty()){
             excluir.setEnabled(false);
-            nomeEscuderia.setText("Sem escuderias.");
+            nomeCorrida.setText("Sem Corridas.");
         }
-        
-        nomeEscuderia.setText(uiPrincipal.sistema.getEscuderias().get(0).getNomeEscuderia());
+
+        nomeCorrida.setText(uiPrincipal.sistema.getCorridas().get(0).getCidade());
     }//GEN-LAST:event_excluirActionPerformed
 
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
-        if(controlador == uiPrincipal.sistema.getEscuderias().size()-1) proximo.setEnabled(true);
+        if(controlador == uiPrincipal.sistema.getCorridas().size()-1) proximo.setEnabled(true);
 
-        if(controlador > 0){  
+        if(controlador > 0){
             controlador--;
-            nomeEscuderia.setText(uiPrincipal.sistema.getEscuderias().get(controlador).getNomeEscuderia());
+            nomeCorrida.setText(uiPrincipal.sistema.getCorridas().get(controlador).getCidade());
             if(controlador == 0){
                 anterior.setEnabled(false);
             }
@@ -124,14 +119,19 @@ public class uiRemoverEscuderia extends javax.swing.JFrame {
     }//GEN-LAST:event_anteriorActionPerformed
 
     private void proximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proximoActionPerformed
-
-        if(controlador < uiPrincipal.sistema.getEscuderias().size()-1){
+        if(controlador < uiPrincipal.sistema.getCorridas().size()-1){
             controlador++;
-            nomeEscuderia.setText(uiPrincipal.sistema.getEscuderias().get(controlador).getNomeEscuderia());
+            nomeCorrida.setText(uiPrincipal.sistema.getCorridas().get(controlador).getCidade());
+            
             if(controlador > 0) anterior.setEnabled(true);
-            if(controlador == uiPrincipal.sistema.getEscuderias().size()-1) proximo.setEnabled(false);
+            if(controlador == uiPrincipal.sistema.getCorridas().size()-1) proximo.setEnabled(false);
         }
     }//GEN-LAST:event_proximoActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        nomeCorrida.setText(uiPrincipal.sistema.getCorridas().get(0).getCidade());
+        anterior.setEnabled(false);
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -150,20 +150,20 @@ public class uiRemoverEscuderia extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(uiRemoverEscuderia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(uiRemoverCorrida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(uiRemoverEscuderia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(uiRemoverCorrida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(uiRemoverEscuderia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(uiRemoverCorrida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(uiRemoverEscuderia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(uiRemoverCorrida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new uiRemoverEscuderia().setVisible(true);
+                new uiRemoverCorrida().setVisible(true);
             }
         });
     }
@@ -171,7 +171,7 @@ public class uiRemoverEscuderia extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton anterior;
     private javax.swing.JButton excluir;
-    private javax.swing.JLabel nomeEscuderia;
+    private javax.swing.JLabel nomeCorrida;
     private javax.swing.JButton proximo;
     // End of variables declaration//GEN-END:variables
 }

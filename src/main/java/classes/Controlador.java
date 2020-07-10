@@ -95,16 +95,45 @@ public class Controlador {
         escuderia.adicionarCarros(new Carro (2, escuderia.getNomeEscuderia(), 120));
     }
     
+    /**
+     * Adiciona uma corrida ao arraylist de corridas
+     * @param cidade
+     * @param numVoltas 
+     */
     public void adicionarCorrida(String cidade, int numVoltas){
         corridas.add(new Corrida(cidade, numVoltas));
     }
     
+    /**
+     * Remove uma escuderia do arraylist escuderias.
+     * @param index - posição da escuderia removida.
+     */
     public void removerEscuderia(int index){
         escuderias.remove(index);
     }
     
+    /**
+     * Retorna as escuderias do controlador.
+     * @return escuderias
+     */
     public ArrayList <Escuderia> getEscuderias(){
         return escuderias;
+    }
+    
+    /**
+     * Remove uma corrida do arraylist corridas.
+     * @param index - posição da corrida a ser removida.
+     */
+    public void removerCorrida(int index){
+        corridas.remove(index);
+    }
+    
+    /**
+     * Retorna o arraylist de corridas.
+     * @return corridas.
+     */
+    public ArrayList <Corrida> getCorridas(){
+        return corridas;
     }
     
     public String relatorioCorridas(){

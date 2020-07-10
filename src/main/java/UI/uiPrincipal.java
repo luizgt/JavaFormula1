@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @author Giulia
  */
 public class uiPrincipal extends javax.swing.JFrame {
-    public static Controlador sistema;
+    public static Controlador sistema = new Controlador();
     
     /**
      * Creates new form uiPrincipal
@@ -50,6 +50,7 @@ public class uiPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -130,6 +131,14 @@ public class uiPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem4);
+
+        jMenuItem5.setText("Remover Escuderia");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
 
         jMenuBar1.add(jMenu2);
 
@@ -219,7 +228,6 @@ public class uiPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void iniciarCampeonatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarCampeonatoActionPerformed
-        sistema = new Controlador();
         log_corrida.setText("");
         try {
             sistema.iniciarCampeonato();
@@ -234,6 +242,11 @@ public class uiPrincipal extends javax.swing.JFrame {
         uiPontucao.setRelatorio("Pontuação Final", sistema.resultadoCampeonato());
         uiPontucao.setVisible(true);
     }//GEN-LAST:event_pontosButtonActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        uiRemoverEscuderia uiRemover = new uiRemoverEscuderia();
+        uiRemover.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,6 +301,7 @@ public class uiPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTextArea log_corrida;
     private javax.swing.JButton pontosButton;

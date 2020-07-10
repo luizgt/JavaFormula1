@@ -99,6 +99,14 @@ public class Controlador {
         corridas.add(new Corrida(cidade, numVoltas));
     }
     
+    public void removerEscuderia(int index){
+        escuderias.remove(index);
+    }
+    
+    public ArrayList <Escuderia> getEscuderias(){
+        return escuderias;
+    }
+    
     public String relatorioCorridas(){
         String relatorio = "";
         for(Corrida c : corridas){
